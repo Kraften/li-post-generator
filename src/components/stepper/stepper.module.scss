@@ -1,0 +1,37 @@
+.wrapper {
+  border-radius: 7px;
+  box-shadow: 7px 10px 34px 0px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .steps {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    height: fit-content;
+    li {
+      margin: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .circle {
+      display: block;
+      margin: 1rem;
+      width: 30px;
+      height: 30px;
+      border-radius: 25px;
+      border: 1px black double;
+    }
+    .activeCircle {
+      background-color: green;
+    }
+  }
+  .stepperContents {
+    flex-grow: 1;
+  }
+}

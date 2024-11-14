@@ -1,0 +1,11 @@
+.chatForm{
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  input {
+    /* width: 200px;
+    height: 40px;
+    border-radius: 7px; */
+    font-size: 1.5em;
+  }
+}

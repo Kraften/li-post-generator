@@ -1,0 +1,58 @@
+main {
+  display: grid;
+  align-items: center;
+  margin: 2rem 4rem 2rem 2rem;
+  .post {
+    grid-area: 1 / 1 / 2 / 2;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  .navigation {
+    grid-area: 1 / 1 / 2 / 2;
+
+    .numbers {
+      margin: 0;
+      columns: auto;
+      display: grid;
+      grid-template-rows: minmax(400px, 80vh);
+      justify-items: center;
+      align-items: center;
+      list-style: none;
+
+      li {
+        margin: 0;
+        grid-area: 1 / 1 / 2 / 2;
+      }
+
+      li:nth-child(1) {
+        transform: translate(-40vh, -23vh);
+      }
+      li:nth-child(2) {
+        transform: translate(40vh, -9vh);
+      }
+      li:nth-child(3) {
+        transform: translate(-40vh, 20vh);
+      }
+    }
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Define the keyframes for the spin animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

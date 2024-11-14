@@ -1,0 +1,11 @@
+.list {
+  overflow-y: scroll;
+  .listItem {
+    cursor: pointer;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    padding: 7px;
+    list-style: none;
+  }
+}
