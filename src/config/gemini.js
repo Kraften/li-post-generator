@@ -72,7 +72,6 @@ const run = async (prompt) => {
     history: [],
   });
   if (prompt) {
-    console.log(import.meta.env.VITE_GOOGLE_GEMINI_API_KEY)
     const result = await chatSession.sendMessage(prompt.toString());
 
     return result;

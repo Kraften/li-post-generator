@@ -1,17 +1,12 @@
 import { useState, useEffect } from "react";
-import LinkedInPost from "./components/li-post/li-post";
+import LinkedInPost2 from "./components/Li-Post/Li-Post2";
 import styles from "./app.module.scss";
-import NumberedSelector from "./components/numbered-selector/numbered-selector";
-import StepperComponent from "./components/stepper/stepper";
+import NumberedSelector from "./components/Numbered-Selector/Numbered-selector";
+import StepperComponent from "./components/Stepper/Stepper";
+import { SECTION } from "./constants/constants";
 
-export const Sections = {
-  NONE: "00",
-  FIRST: "01",
-  SECOND: "02",
-  THIRD: "03",
-};
 const App = () => {
-  const [activeSelection, setActiveSelection] = useState(Sections.NONE); // State to track loading
+  const [activeSelection, setActiveSelection] = useState(SECTION.NONE);
   const section = [
     { sectionNumber: "01", title: "Intro Text", isNumberLeft: true },
     { sectionNumber: "02", title: "Main Text", isNumberLeft: false },
@@ -19,31 +14,29 @@ const App = () => {
   ];
 
   const handleSelectionFromChild = (section) => {
-    console.log("🚀 ~ handleSelectionFromChild ~ asd:", section);
     switch (section) {
-      case Sections.FIRST:
-        setActiveSelection(Sections.FIRST);
+      case SECTION.FIRST:
+        setActiveSelection(SECTION.FIRST);
         break;
-      case Sections.SECOND:
-        setActiveSelection(Sections.SECOND);
+      case SECTION.SECOND:
+        setActiveSelection(SECTION.SECOND);
         break;
-      case Sections.THIRD:
-        setActiveSelection(Sections.THIRD);
+      case SECTION.THIRD:
+        setActiveSelection(SECTION.THIRD);
         break;
-      case Sections.NONE:
-        setActiveSelection(Sections.NONE);
+      case SECTION.NONE:
+        setActiveSelection(SECTION.NONE);
         break;
     }
   };
 
   const handleCloseSection = () => {
-    setActiveSelection(Sections.NONE);
+    setActiveSelection(SECTION.NONE);
   };
 
   return (
     <main>
-      <StepperComponent></StepperComponent>
-      {/* <div className={styles.navigation}>
+      <div className={styles.navigation}>
         <ul className={styles.numbers}>
           {section.map((section) => {
             return (
@@ -57,11 +50,11 @@ const App = () => {
         </ul>
       </div>
       <div className={styles.post}>
-        <LinkedInPost
+        <LinkedInPost2
           sectionSelected={activeSelection}
           sendDataToParent={handleCloseSection}
-        ></LinkedInPost>
-      </div> */}
+        ></LinkedInPost2>
+      </div>
       {/* {loading ? <LoadingSpinner></LoadingSpinner> : null} */}
     </main>
   );

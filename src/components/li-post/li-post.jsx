@@ -1,9 +1,10 @@
-import styles from "./li-post.module.scss";
+import styles from "./Li-Post.module.scss";
 import { useEffect, useState } from "react";
-import { Sections } from "./../../App";
 import { TextareaAutosize } from "@mui/base";
 import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { SECTION } from "../../constants/constants";
+import StepperComponent from "./../Stepper/Stepper";
 
 const LinkedInPost = ({ sectionSelected, sendDataToParent }) => {
   const [about, setAbout] = useState(
@@ -12,15 +13,14 @@ const LinkedInPost = ({ sectionSelected, sendDataToParent }) => {
   const [body, setBody] = useState(
     `Ipsum dolor sit amet consectetur adipisicing elit. Corrupti ipsam dignissimos repellendus optio, maxime nesciunt quidem a facere possimus voluptas distinctio praesentium facilis perferendis modi magnam eveniet, ad quaerat dolorum? Ipsum dolor sit amet consectetur adipisicing elit. Corrupti ipsam dignissimos repellendus optio, maxime nesciunt quidem a facere possimus voluptas distinctio praesentium facilis perferendis modi magnam eveniet, ad quaerat dolorum? Ipsum dolor sit amet consectetur adipisicing elit. Corrupti ipsam dignissimos repellendus optio, maxime nesciunt quidem a facere possimus voluptas distinctio praesentium facilis perferendis modi magnam eveniet, ad quaerat dolorum? Ipsum dolor sit amet consectetur adipisicing elit. Corrupti ipsam dignissimos repellendus optio, maxime nesciunt quidem a facere possimus voluptas distinctio praesentium facilis perferendis modi magnam eveniet, ad quaerat dolorum? nesciunt quidem a facere possimus voluptas distinctio praesentium facilis perferendis modi magnam eveniet, ad quaerat dolorum? Ipsum dolor sit amet consectetur adipisicing elit. Corrupti ipsam dignissimos repellendus optio, maxime nesciunt quidem a facere possimus voluptas distinctio praesentium facilis perferendis modi magnam eveniet, ad quaerat dolorum?`
   );
-  useEffect(() => {
-    console.log(sectionSelected);
-  }, [sectionSelected]);
+
   const handleSaveAndClose = () => {
-    sendDataToParent(Sections.NONE);
+    sendDataToParent(SECTION.NONE);
   };
+
   const selectSections = () => {
     switch (sectionSelected) {
-      case Sections.FIRST:
+      case SECTION.FIRST:
         return (
           <>
             <TextareaAutosize
@@ -41,11 +41,15 @@ const LinkedInPost = ({ sectionSelected, sendDataToParent }) => {
             <p className={styles.aboutText}>{body}</p>
           </>
         );
-      case Sections.SECOND:
+      case SECTION.SECOND:
         return (
           <>
             <p className={styles.bodyText}>{about}</p>
-            <TextareaAutosize
+            <div>
+              <StepperComponent tepperComponent></StepperComponent>
+            </div>
+
+            {/* <TextareaAutosize
               onChange={(e) => setBody(e.target.value)}
               className={styles.scaleUp}
               defaultValue={body}
@@ -58,7 +62,7 @@ const LinkedInPost = ({ sectionSelected, sendDataToParent }) => {
               >
                 <CheckCircleIcon fontSize="inherit" />
               </IconButton>
-            </div>
+            </div> */}
           </>
         );
 
@@ -67,14 +71,14 @@ const LinkedInPost = ({ sectionSelected, sendDataToParent }) => {
           <>
             <p
               className={`${
-                sectionSelected === Sections.FIRST ? styles.scaleUp : ""
+                sectionSelected === SECTION.FIRST ? styles.scaleUp : ""
               }`}
             >
               {about}
             </p>
             <p
               className={`${
-                sectionSelected === Sections.SECOND ? styles.scaleUp : ""
+                sectionSelected === SECTION.SECOND ? styles.scaleUp : ""
               }`}
             >
               {body}
@@ -83,10 +87,6 @@ const LinkedInPost = ({ sectionSelected, sendDataToParent }) => {
         );
     }
   };
-
-  useEffect(() => {
-    console.log("🚀 ~ LinkedInPost ~ sectionSelected:", sectionSelected);
-  }, [sectionSelected]);
 
   return (
     <div className={`${sectionSelected} ${styles.linkedinPost} `}>

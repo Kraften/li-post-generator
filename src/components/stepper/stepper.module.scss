@@ -1,12 +1,12 @@
 .wrapper {
   border-radius: 7px;
-  box-shadow: 7px 10px 34px 0px rgba(0, 0, 0, 0.1);
-  height: 800px;
-  width: 700px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  .steps {
+  // box-shadow: 7px 10px 34px 0px rgba(0, 0, 0, 0.1);
+  display: grid;
+  max-height: 800px;
+  grid-template-rows: 1fr 4fr 0.5fr;
+  background-color: white;
+
+  .stepsRow {
     padding: 0;
     margin: 0;
     display: flex;
@@ -31,7 +31,18 @@
       background-color: green;
     }
   }
-  .stepperContents {
-    flex-grow: 1;
+  .contentsRow {
+    margin: 1rem;
+    overflow: auto;
+
+    ul {
+      padding: 0rem 2rem;
+    }
+  }
+  .buttonsRow {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 2rem;
   }
 }

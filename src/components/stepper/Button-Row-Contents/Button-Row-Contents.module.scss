@@ -1,0 +1,10 @@
+.nextButton {
+  transform: scale(2.5);
+  color: green !important;
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  &:hover {
+    transform: scale(3);
+  }
+}

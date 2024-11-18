@@ -1,12 +1,7 @@
-import { useEffect } from "react";
 import styles from "./numbered-selector.module.scss";
 import PropTypes from "prop-types";
 
 const NumberedSelector = ({ section, selectSection }) => {
-  useEffect(() => {
-    console.log(section.sectionNumber);
-  }, [section]);
-
   const svgLine = () => {
     return (
       <svg width="150" height="60">
@@ -57,6 +52,7 @@ const NumberedSelector = ({ section, selectSection }) => {
 export default NumberedSelector;
 
 NumberedSelector.propTypes = {
+  selectSection: PropTypes.func,
   section: PropTypes.shape({
     sectionNumber: PropTypes.string,
     title: PropTypes.string,
