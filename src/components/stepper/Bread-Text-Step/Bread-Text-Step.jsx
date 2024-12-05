@@ -5,7 +5,7 @@ import chatStore from "./../../../store/chatStore";
 const BreadTextStep = () => {
   const breadTextList = chatStore((state) => state.breadTextList);
 
-  return <>{breadTextList}</>;
+  return <div className={styles.text}>{breadTextList}</div>;
 };
 
 export default BreadTextStep;

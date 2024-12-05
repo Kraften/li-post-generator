@@ -1,40 +1,46 @@
-main {
-  display: grid;
+.header {
+  font-family: "GeistMono";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin: 2rem 4rem 2rem 2rem;
-  .post {
-    grid-area: 1 / 1 / 2 / 2;
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
+  p {
+    width: 50%;
   }
-  .navigation {
-    grid-area: 1 / 1 / 2 / 2;
+}
 
-    .numbers {
-      margin: 0;
-      columns: auto;
-      display: grid;
-      grid-template-rows: minmax(400px, 80vh);
-      justify-items: center;
-      align-items: center;
-      list-style: none;
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
 
-      li {
-        margin: 0;
-        grid-area: 1 / 1 / 2 / 2;
-      }
-
-      li:nth-child(1) {
-        transform: translate(-40vh, -23vh);
-      }
-      li:nth-child(2) {
-        transform: translate(40vh, -9vh);
-      }
-      li:nth-child(3) {
-        transform: translate(-40vh, 20vh);
+  .postContainer {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .leftSide {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+    margin-right: 1rem;
+    .selector3 {
+      .container {
+        .numberWrapper {
+          .line {
+            background-color: green;
+          }
+        }
       }
     }
+  }
+  .rightSide {
+    grid-column: 3;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 1rem;
   }
 }
 
@@ -47,7 +53,6 @@ main {
   animation: spin 1s linear infinite;
 }
 
-/* Define the keyframes for the spin animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -55,4 +60,15 @@ main {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.selector1 {
+  margin-bottom: 16rem;
+}
+
+.selector2 {
+  margin-bottom: 14rem;
+}
+.selector3 {
+  margin-bottom: 5rem;
 }

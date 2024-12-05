@@ -1,4 +1,3 @@
-import styles from "./Active-Step-Contents.module.scss";
 import QuestionInput from "../Question-Input/Question-Input";
 import ListAnswers from "../List-Answers/List-Answers";
 import { STEPS } from "../../../constants/constants";
@@ -9,7 +8,6 @@ const ActiveStepContents = ({
   activeStep,
   chatError,
   handleQuestionFromChild,
-  passSelectedPerksToParent,
 }) => {
   const stepContentSwitcher = () => {
     switch (activeStep) {
@@ -21,11 +19,7 @@ const ActiveStepContents = ({
           ></QuestionInput>
         );
       case STEPS.PERKS:
-        return (
-          <ListAnswers
-            passSelectedPerksToParent={passSelectedPerksToParent}
-          ></ListAnswers>
-        );
+        return <ListAnswers></ListAnswers>;
       case STEPS.CONFIRM:
         return <BreadTextStep></BreadTextStep>;
       default:

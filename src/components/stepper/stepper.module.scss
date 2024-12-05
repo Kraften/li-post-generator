@@ -1,36 +1,86 @@
-.wrapper {
-  border-radius: 7px;
-  // box-shadow: 7px 10px 34px 0px rgba(0, 0, 0, 0.1);
+.stepper {
+  border-radius: var(--card-border-radius);
   display: grid;
   max-height: 800px;
   grid-template-rows: 1fr 4fr 0.5fr;
   background-color: white;
+  position: absolute;
+  top: -110px;
+  box-shadow: var(--selected-box-shadow);
 
-  .stepsRow {
-    padding: 0;
-    margin: 0;
+  .stepsRowWrapper {
     display: flex;
-    justify-content: center;
-    list-style: none;
-    height: fit-content;
-    li {
-      margin: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .stepsRow {
+      padding: 0;
+      margin-left: 28%;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      list-style: none;
+      height: fit-content;
+      .titleWrapper {
+        display: flex;
+        margin-left: 0.5rem;
+      }
+      .circleWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .circleLineRow {
+          display: flex;
+          align-items: center;
+        }
+        .lineWrapper {
+          position: relative;
+          .line {
+            width: 60px;
+            height: 3px;
+            border-radius: 4px;
+            background: lightgrey;
+          }
+        }
+
+        .circle {
+          display: block;
+          margin: 1rem;
+          width: 30px;
+          height: 30px;
+          border-radius: 25px;
+          background-color: var(--disabled-grey);
+        }
+
+        .circle::before {
+          content: "✔";
+          color: white;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-52.5%, -52.5%);
+          opacity: 1;
+          transition: opacity 0.5s ease;
+        }
+        .activeCircle {
+          box-shadow: 0 0 0 3px #fff, 0 0 0 5px #27ae60, 0 0 0 33px #fff,
+            0 0 0 16px #27ae60;
+          background-color: var(--primary-green);
+        }
+      }
+      li {
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
     }
-    .circle {
-      display: block;
-      margin: 1rem;
-      width: 30px;
-      height: 30px;
-      border-radius: 25px;
-      border: 1px black double;
-    }
-    .activeCircle {
-      background-color: green;
+    .x {
+      padding: 2rem;
+      cursor: pointer;
     }
   }
+
   .contentsRow {
     margin: 1rem;
     overflow: auto;
@@ -44,5 +94,35 @@
     justify-content: end;
     align-items: center;
     margin-right: 2rem;
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid var(--primary-green);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  animation: rotate 1s linear infinite;
+}
+.modalOverlay {
+  position: absolute;
+  z-index: 1;
+  left: 1%;
+  top: 17%;
+  width: 680px;
+  height: 83%;
+  backdrop-filter: blur(10px);
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

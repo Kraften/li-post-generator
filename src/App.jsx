@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import LinkedInPost2 from "./components/Li-Post/Li-Post2";
+import LinkedInPost from "./components/Li-Post/Li-Post";
 import styles from "./app.module.scss";
 import NumberedSelector from "./components/Numbered-Selector/Numbered-selector";
-import StepperComponent from "./components/Stepper/Stepper";
 import { SECTION } from "./constants/constants";
+import chatStore from "./store/chatStore";
 
 const App = () => {
-  const [activeSelection, setActiveSelection] = useState(SECTION.NONE);
+  const updateSelectedState = chatStore((state) => state.updateSelectedState);
+
   const section = [
     { sectionNumber: "01", title: "Intro Text", isNumberLeft: true },
     { sectionNumber: "02", title: "Main Text", isNumberLeft: false },
@@ -16,46 +16,67 @@ const App = () => {
   const handleSelectionFromChild = (section) => {
     switch (section) {
       case SECTION.FIRST:
-        setActiveSelection(SECTION.FIRST);
+        updateSelectedState(SECTION.FIRST);
+
         break;
       case SECTION.SECOND:
-        setActiveSelection(SECTION.SECOND);
+        updateSelectedState(SECTION.SECOND);
+
         break;
       case SECTION.THIRD:
-        setActiveSelection(SECTION.THIRD);
+        updateSelectedState(SECTION.THIRD);
+
         break;
       case SECTION.NONE:
-        setActiveSelection(SECTION.NONE);
+        updateSelectedState(SECTION.NONE);
+
         break;
     }
   };
 
-  const handleCloseSection = () => {
-    setActiveSelection(SECTION.NONE);
-  };
-
   return (
     <main>
-      <div className={styles.navigation}>
-        <ul className={styles.numbers}>
-          {section.map((section) => {
-            return (
+      <section className={`${styles.header} fadeIn`}>
+        <h1>Welcome to Content Generator</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+          volutpat.
+        </p>
+      </section>
+      <section>
+        <ul className={`${styles.numbers}`}>
+          <div className={styles.leftSide}>
+            <div className={styles.selector1}>
               <NumberedSelector
                 key={section.sectionNumber}
                 selectSection={handleSelectionFromChild}
-                section={section}
+                section={section[0]}
               ></NumberedSelector>
-            );
-          })}
+            </div>
+            <div className={styles.selector3}>
+              <NumberedSelector
+                key={section.sectionNumber}
+                selectSection={handleSelectionFromChild}
+                section={section[2]}
+              ></NumberedSelector>
+            </div>
+          </div>
+          <div className={styles.rightSide}>
+            <div className={styles.selector2}>
+              <NumberedSelector
+                key={section.sectionNumber}
+                selectSection={handleSelectionFromChild}
+                section={section[1]}
+              ></NumberedSelector>
+            </div>
+          </div>
+
+          <div className={`${styles.postContainer}`}>
+            <LinkedInPost></LinkedInPost>
+          </div>
         </ul>
-      </div>
-      <div className={styles.post}>
-        <LinkedInPost2
-          sectionSelected={activeSelection}
-          sendDataToParent={handleCloseSection}
-        ></LinkedInPost2>
-      </div>
-      {/* {loading ? <LoadingSpinner></LoadingSpinner> : null} */}
+      </section>
     </main>
   );
 };

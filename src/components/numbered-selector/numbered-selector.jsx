@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const NumberedSelector = ({ section, selectSection }) => {
   const svgLine = () => {
     return (
-      <svg width="150" height="60">
+      <svg width="130" height="60">
         <path
           d="M 0 10 H 50 L 85 45 H 135"
           stroke="black"
@@ -14,38 +14,47 @@ const NumberedSelector = ({ section, selectSection }) => {
       </svg>
     );
   };
+
   const handleSectionClick = () => {
     selectSection(section.sectionNumber);
   };
 
   return (
-    <li className={`${styles.wrapper}`} onClick={handleSectionClick}>
-      {section.isNumberLeft ? (
-        <span className={`${styles.number} `}>{section.sectionNumber}</span>
-      ) : null}
-      {!section.isNumberLeft ? (
-        <div
-          className={`${styles.line} ${
-            section.sectionNumber !== "01" ? styles.flipLine : null
-          }`}
-        >
-          {svgLine()}
-        </div>
-      ) : null}
+    <div className={`${styles.container} fadeIn`} onClick={handleSectionClick}>
+      <li className={`${styles.numberWrapper}`}>
+        {section.isNumberLeft ? (
+          <span className={`${styles.number} `}>{section.sectionNumber}</span>
+        ) : null}
+        {!section.isNumberLeft ? (
+          <div
+            className={`${styles.line} ${
+              section.sectionNumber !== "01" ? styles.flipLine : null
+            }`}
+          >
+            {svgLine()}
+          </div>
+        ) : null}
 
-      {section.isNumberLeft ? (
-        <div
-          className={`${styles.line} ${
-            section.sectionNumber !== "01" ? styles.flipLine : null
-          }`}
-        >
-          {svgLine()}
-        </div>
-      ) : null}
-      {!section.isNumberLeft ? (
-        <span className={styles.number}>{section.sectionNumber}</span>
-      ) : null}
-    </li>
+        {section.isNumberLeft ? (
+          <div
+            className={`${styles.line} ${
+              section.sectionNumber !== "01" ? styles.flipLine : null
+            }`}
+          >
+            {svgLine()}
+          </div>
+        ) : null}
+        {!section.isNumberLeft ? (
+          <span className={styles.number}>{section.sectionNumber}</span>
+        ) : null}
+      </li>
+
+      <span
+        className={`${styles.asd} ${!section.isNumberLeft ? "flexEnd" : ""}`}
+      >
+        {section.title}
+      </span>
+    </div>
   );
 };
 

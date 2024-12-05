@@ -4,7 +4,7 @@
     cursor: pointer;
     border: 1px solid black;
     margin-bottom: 5px;
-    border-radius: 7px;
+    border-radius: var(--card-border-radius);
     padding: 7px;
     list-style: none;
     .liHeader {

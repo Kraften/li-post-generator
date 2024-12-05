@@ -1,3 +1,18 @@
+:root {
+  --primary-green: #4db84f;
+  --disabled-grey: #aeaeae;
+  --selected-box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  --card-border-radius: 8px;
+}
+
+.blur {
+  position: absolute;
+  width: 762px;
+  height: 1106px;
+  backdrop-filter: blur(3px);
+  top: 290px;
+}
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -21,4 +36,39 @@
 .flexAlign {
   display: flex;
   align-items: center;
+}
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fadeIn {
+  animation: fadeIn 1000ms ease-in-out forwards;
+}
+// .boxShadowRevel {
+//   animation: boxShadowRevel 1000ms ease-in-out forwards;
+// }
+
+@font-face {
+  font-family: "GeistMono";
+  src: local("RubikScribble-Regular"),
+    url("./assets/fonts/GeistMono-VariableFont_wght.ttf");
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes boxShadowRevel {
+  0% {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+  100% {
+    box-shadow: var(--selected-box-shadow);
+  }
 }

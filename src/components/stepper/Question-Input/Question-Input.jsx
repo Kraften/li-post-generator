@@ -7,9 +7,9 @@ const QuestionInput = ({ sendQuestionTextToParent, chatError }) => {
   const handleChange = (e) => {
     sendQuestionTextToParent(e.target.value);
   };
-
-  useEffect(() => {}, []);
-
+  useEffect(() => {
+    console.log("🚀 ~ QuestionInput ~ chatError:", chatError);
+  }, [chatError]);
   return (
     <div className={styles.questionWrapper}>
       <TextField

@@ -2,58 +2,14 @@ import { useState } from "react";
 import chatStore from "../../../store/chatStore";
 import styles from "./list-answers.module.scss";
 import { PropTypes } from "prop-types";
-export const dummyData = [
-  {
-    header: "Introduction",
-    bulletPoint: "This section covers the basics of the topic.",
-  },
-  {
-    header: "Features",
-    bulletPoint: "Highlights the key features and benefits.",
-  },
-  {
-    header: "Requirements",
-    bulletPoint: "Lists the prerequisites and necessary tools.",
-  },
-  {
-    header: "Setup Instructions",
-    bulletPoint: "Step-by-step guide on how to get started.",
-  },
-  {
-    header: "FAQs",
-    bulletPoint: "Answers to common questions users might have.",
-  },
-  {
-    header: "Introduction",
-    bulletPoint:
-      "This section covers the basics of the topic.This section covers the basics of the topic.This section covers the basics of the topic.This section covers the basics of the topic.",
-  },
-  {
-    header: "Features",
-    bulletPoint: "Highlights the key features and benefits.",
-  },
-  {
-    header: "Requirements",
-    bulletPoint: "Lists the prerequisites and necessary tools.",
-  },
-  {
-    header: "Setup Instructions",
-    bulletPoint: "Step-by-step guide on how to get started.",
-  },
-  {
-    header: "FAQs",
-    bulletPoint: "Answers to common questions users might have.",
-  },
-];
 
-const ListAnswers = ({ passSelectedPerksToParent }) => {
+const ListAnswers = () => {
   const listAnswer = chatStore((state) => state.listAnswer);
   const [selectedItems, setSelectedItems] = useState([]);
-  const selectedListAnswer = chatStore((state) => state.selectedListAnswer);
-
-  const updateSelectedListAnswer = chatStore(
-    (state) => state.updateSelectedListAnswer
+  const updateSelectedListItems = chatStore(
+    (state) => state.updateSelectedListItems
   );
+
   const handleSelectItem = (item) => {
     const isSelected = selectedItems.some(
       (selectedItem) => selectedItem.bulletPoint === item.bulletPoint
@@ -67,9 +23,7 @@ const ListAnswers = ({ passSelectedPerksToParent }) => {
       );
     } else {
       setSelectedItems([...selectedItems, item]);
-      console.log(selectedItems);
-      passSelectedPerksToParent(selectedItems);
-      updateSelectedListAnswer();
+      updateSelectedListItems(item);
     }
   };
 
