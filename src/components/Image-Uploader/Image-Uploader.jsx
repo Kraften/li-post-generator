@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import html2canvas from "html2canvas";
 import styles from "./Image-Uploader.module.scss";
 import chatStore from "../../store/chatStore";
+import { SECTION, STEPS } from "../../constants/constants.js";
 
 const ImageUploaderWithLogo = () => {
   const [image2, setImage] = useState(null);
   const [logo, setLogo] = useState(null);
   const [logoPosition, setLogoPosition] = useState({ top: 50, left: 50 });
   const updateImage = chatStore((state) => state.updateImage);
+  const updateSelectedState = chatStore((state) => state.updateSelectedState);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -46,10 +48,17 @@ const ImageUploaderWithLogo = () => {
       link.click();
     });
   };
-
+  const handleCloseStepper = () => {
+    updateSelectedState(SECTION.NONE);
+  };
   return (
-    <div className={styles.container}>
-      <h2 className={styles.header}>Upload Image and Add Logo</h2>
+    <div className={styles.containerz}>
+      <div className={`${styles.headerWrapper} flexRow`}>
+        <h2 className={styles.header}>Upload Image and Add Logo</h2>
+        <span className={styles.x} onClick={handleCloseStepper}>
+          X
+        </span>
+      </div>
       <div>
         <label className={styles.fileInput}>
           Upload Background Image:

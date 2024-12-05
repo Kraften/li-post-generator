@@ -1,22 +1,28 @@
-.container {
-  border-radius: var(--card-border-radius);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-height: 800px;
-  grid-template-rows: 1fr 4fr 0.5fr;
-  background-color: white;
+.containerz {
+  display: grid;
+  padding: 0 1rem 1rem 1rem;
   position: absolute;
+  grid-template-rows: auto;
+  background-color: white;
   box-shadow: var(--selected-box-shadow);
+  border-radius: var(--card-border-radius);
+  width: 100%;
+  top: -581px;
+  left: -16px;
 
-  .header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  .headerWrapper {
+    justify-content: space-between;
+    align-items: center;
+
+    .x {
+      cursor: pointer;
+    }
+    .header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
   }
-
   .fileInput {
     margin: 10px 0;
     display: inline-block;

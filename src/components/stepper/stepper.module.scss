@@ -1,12 +1,12 @@
 .stepper {
-  border-radius: var(--card-border-radius);
   display: grid;
+  position: absolute;
+  top: -110px;
   max-height: 800px;
   grid-template-rows: 1fr 4fr 0.5fr;
   background-color: white;
-  position: absolute;
-  top: -110px;
   box-shadow: var(--selected-box-shadow);
+  border-radius: var(--card-border-radius);
 
   .stepsRowWrapper {
     display: flex;

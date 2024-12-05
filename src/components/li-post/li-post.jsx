@@ -37,10 +37,6 @@ const LinkedInPost = () => {
         selectedState === SECTION.NONE ? styles.boxShadow : styles.border
       } boxShadowRevel`}
     >
-      {selectedState !== SECTION.NONE ? (
-        <div className={styles.modalOverlay}></div>
-      ) : null}
-
       <div className={`${styles.postHeader}`}>
         <img
           src="/sce_logo.jpg"
@@ -58,6 +54,8 @@ const LinkedInPost = () => {
 
       <div className={`${styles.postContent}`}>
         <div className={styles.textSection}>
+          <p>{about}</p>
+
           {selectedState === SECTION.FIRST ? (
             <div>
               <TextareaAutosize
@@ -76,12 +74,9 @@ const LinkedInPost = () => {
                 </IconButton>
               </div>
             </div>
-          ) : (
-            <p>{about}</p>
-          )}
-
+          ) : null}
           {selectedState === SECTION.SECOND ? (
-            <div className={`${styles.scaleUp} `}>
+            <div className={styles.scaleUp}>
               <div>
                 <StepperComponent></StepperComponent>
               </div>
@@ -96,7 +91,7 @@ const LinkedInPost = () => {
         ) : null}
         {image ? (
           <div className={styles.imageContainer}>
-            <img className={styles.postImage} src={image}></img>
+            <img className={styles.postImage} src={image} width={700}></img>
           </div>
         ) : (
           <div className={`${styles.imageContainer} flexCenter`}>

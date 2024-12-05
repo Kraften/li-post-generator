@@ -8,7 +8,13 @@
     width: 50%;
   }
 }
-
+.modalOverlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  backdrop-filter: blur(3px);
+}
 .numbers {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

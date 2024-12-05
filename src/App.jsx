@@ -6,6 +6,7 @@ import chatStore from "./store/chatStore";
 
 const App = () => {
   const updateSelectedState = chatStore((state) => state.updateSelectedState);
+  const selectedState = chatStore((state) => state.selectedState);
 
   const section = [
     { sectionNumber: "01", title: "Intro Text", isNumberLeft: true },
@@ -45,6 +46,10 @@ const App = () => {
         </p>
       </section>
       <section>
+        {selectedState !== SECTION.NONE ? (
+          <div className={styles.modalOverlay}></div>
+        ) : null}
+
         <ul className={`${styles.numbers}`}>
           <div className={styles.leftSide}>
             <div className={styles.selector1}>
