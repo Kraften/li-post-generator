@@ -1,8 +1,8 @@
-import LinkedInPost from "./components/Li-Post/Li-Post";
 import styles from "./app.module.scss";
 import NumberedSelector from "./components/Numbered-Selector/Numbered-selector";
 import { SECTION } from "./constants/constants";
 import chatStore from "./store/chatStore";
+import New from "./components/New";
 
 const App = () => {
   const updateSelectedState = chatStore((state) => state.updateSelectedState);
@@ -45,43 +45,35 @@ const App = () => {
           volutpat.
         </p>
       </section>
-      <section>
-        {selectedState !== SECTION.NONE ? (
-          <div className={styles.modalOverlay}></div>
-        ) : null}
-
-        <ul className={`${styles.numbers}`}>
-          <div className={styles.leftSide}>
-            <div className={styles.selector1}>
-              <NumberedSelector
-                key={section.sectionNumber}
-                selectSection={handleSelectionFromChild}
-                section={section[0]}
-              ></NumberedSelector>
-            </div>
-            <div className={styles.selector3}>
-              <NumberedSelector
-                key={section.sectionNumber}
-                selectSection={handleSelectionFromChild}
-                section={section[2]}
-              ></NumberedSelector>
-            </div>
-          </div>
-          <div className={styles.rightSide}>
-            <div className={styles.selector2}>
-              <NumberedSelector
-                key={section.sectionNumber}
-                selectSection={handleSelectionFromChild}
-                section={section[1]}
-              ></NumberedSelector>
-            </div>
-          </div>
-
-          <div className={`${styles.postContainer}`}>
-            <LinkedInPost></LinkedInPost>
-          </div>
-        </ul>
-      </section>
+      <div className={styles.app}>
+        <div className={`${styles.annotation} ${styles.annotation01}`}>
+          <NumberedSelector
+            style={{}}
+            key={"01"}
+            selectSection={handleSelectionFromChild}
+            section={section[0]}
+          ></NumberedSelector>
+        </div>
+        <div className={`${styles.annotation} ${styles.annotation02}`}>
+          <NumberedSelector
+            style={{}}
+            key={"01"}
+            selectSection={handleSelectionFromChild}
+            section={section[1]}
+          ></NumberedSelector>
+        </div>
+        <div className={styles.card}>
+          <New></New>
+        </div>
+        <div className={`${styles.annotation} ${styles.annotation03}`}>
+          <NumberedSelector
+            style={{}}
+            key={"01"}
+            selectSection={handleSelectionFromChild}
+            section={section[2]}
+          ></NumberedSelector>
+        </div>
+      </div>
     </main>
   );
 };

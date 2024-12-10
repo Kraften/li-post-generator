@@ -1,21 +1,23 @@
 .containerz {
   display: grid;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem;
   position: absolute;
+  top: 200px;
+  width: 100%;
   grid-template-rows: auto;
   background-color: white;
   box-shadow: var(--selected-box-shadow);
   border-radius: var(--card-border-radius);
-  width: 100%;
-  top: -581px;
-  left: -16px;
+  font-family: "GeistMono";
 
   .headerWrapper {
+    grid-row: 1;
     justify-content: space-between;
     align-items: center;
 
     .x {
       cursor: pointer;
+      padding: 0;
     }
     .header {
       font-size: 24px;
@@ -24,38 +26,36 @@
     }
   }
   .fileInput {
+    grid-row: 2;
     margin: 10px 0;
     display: inline-block;
   }
 
   .outputContainer {
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
-  .uploadedImage {
-    display: block;
-    max-width: 500px;
-    max-height: 400px;
+    .uploadedImage {
+      min-width: 100%;
+      min-height: 100%;
+    }
   }
-
-  .logoImage {
-    position: absolute;
-    width: 100px;
-    cursor: move;
-  }
-
-  .saveButton {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .buttonRow {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 1rem 0 1rem 1rem;
+    .saveButton {
+      border-radius: 25px;
+      cursor: pointer;
+      transform: scale(2);
+      color: var(--primary-green);
+    }
   }
 
   .saveButton:hover {
-    background-color: #218838;
+    color: var(--hover-green);
   }
 }

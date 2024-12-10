@@ -1,0 +1,194 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .header {
+    font-family: "GeistMono";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    p {
+      width: 50%;
+    }
+  }
+  .relative {
+    position: relative;
+
+    .linkedinPost {
+      border-radius: var(--card-border-radius);
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 2rem;
+      p {
+        cursor: pointer;
+      }
+      .modalOverlay {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(3px);
+      }
+
+      .postHeader {
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        .userInfo {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .userName {
+          margin: 0;
+          font-weight: bold;
+        }
+
+        .userTitle,
+        .postTime {
+          color: #555;
+          font-size: 0.85em;
+        }
+        .profilePicture {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+      }
+      .postContent {
+        grid-row: 2;
+        display: grid;
+        grid-template-rows: auto 1fr;
+
+        .textSection {
+          p {
+            margin-bottom: 1rem;
+            cursor: pointer;
+          }
+        }
+        .noImage {
+          width: 100%;
+          height: 450px;
+          grid-row: 2;
+          background-color: #bdbdbd;
+          border-radius: var(--card-border-radius);
+          font-weight: 700;
+        }
+        .imageContainer {
+          cursor: pointer;
+          grid-row: 2;
+          border-radius: var(--card-border-radius);
+          font-weight: 700;
+          width: 100%;
+          overflow: hidden;
+
+          .postImage {
+            border-radius: var(--card-border-radius);
+            width: 100%;
+          }
+        }
+      }
+
+      .postFooter {
+        grid-row: 3;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+      }
+
+      .postAction {
+        background: none;
+        border: none;
+        color: #0073b1;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 8px;
+        transition: background-color 0.2s ease;
+      }
+    }
+    .moda {
+      position: absolute;
+      top: 99px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      .aboutTextContainer {
+        .textareaContainer {
+          position: relative;
+
+          .textareaButton {
+            color: #000000;
+            position: absolute;
+            bottom: -30px;
+            right: -31px;
+            cursor: pointer;
+            background-color: white;
+          }
+        }
+
+        .textInput {
+          top: 0;
+          border-radius: var(--card-border-radius);
+          padding: 1rem;
+          width: 100%;
+          box-shadow: var(--selected-box-shadow);
+        }
+      }
+      .stepperContainer {
+      }
+      .imagePickerContainer {
+        position: relative;
+      }
+    }
+
+    .absolute {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      backdrop-filter: blur(3px);
+    }
+
+    .scaleUp {
+      animation: scale 500ms ease-in-out forwards;
+    }
+
+    .fadeInButton {
+      animation: fadeIn 300ms ease-in-out forwards;
+    }
+
+    .border {
+      border: 1px solid black;
+    }
+
+    .boxShadow {
+      box-shadow: var(--selected-box-shadow);
+    }
+
+    @keyframes scale {
+      0% {
+      }
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+}

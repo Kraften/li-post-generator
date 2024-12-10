@@ -6,6 +6,8 @@ import ActiveStepContents from "./Active-Step-Contents/Active-Step-Contents";
 import { SECTION, STEPS } from "../../constants/constants.js";
 import ButtonRowContents from "./Button-Row-Contents/Button-Row-Contents";
 import { PropTypes } from "prop-types";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const StepperComponent = () => {
   const [activeStep, setActiveStep] = useState(STEPS.HOBBY);
@@ -95,65 +97,59 @@ const StepperComponent = () => {
         <ul className={styles.stepsRow}>
           <li>
             <div className={styles.circleWrapper}>
-              <div>
-                <div className={styles.circleLineRow}>
-                  <span
-                    className={`${styles.circle} ${
-                      activeStep === "Hobby" ? styles.activeCircle : ""
-                    }`}
-                  ></span>
-                  <div className={styles.lineWrapper}>
-                    <div className={styles.line}></div>
-                  </div>
-                </div>
-                <div className={styles.titleWrapper}>
-                  <div className={styles.title}>Hobby</div>
-                </div>
-              </div>
+              <span
+                className={`${styles.circle} ${
+                  activeStep === "Hobby" ? styles.activeCircle : ""
+                }`}
+              ></span>
+            </div>
+
+            <div className={styles.lineWrapper}>
+              <div className={styles.line}></div>
+            </div>
+            <div className={styles.titleWrapper}>
+              <div className={styles.title}>Hobby</div>
             </div>
           </li>
           <li>
             <div className={styles.circleWrapper}>
-              <div>
-                <div className={styles.circleLineRow}>
-                  <span
-                    className={`${styles.circle} ${
-                      activeStep === "Select Perks" ? styles.activeCircle : ""
-                    }`}
-                  ></span>
-                  <div className={styles.lineWrapper}>
-                    <div className={styles.line}></div>
-                  </div>
-                </div>
-                <div className={styles.titleWrapper}>
-                  <div className={styles.title}>Hobby</div>
-                </div>
-              </div>
+              <span
+                className={`${styles.circle} ${
+                  activeStep === "Select Perks" ? styles.activeCircle : ""
+                }`}
+              ></span>
+            </div>
+
+            <div className={styles.lineWrapper}>
+              <div className={styles.line}></div>
+            </div>
+            <div className={styles.titleWrapper}>
+              <div className={styles.title}>Perks</div>
             </div>
           </li>
           <li>
             <div className={styles.circleWrapper}>
-              <div>
-                <div className={styles.circleLineRow}>
-                  <span
-                    className={`${styles.circle} ${
-                      activeStep === "Confirm" ? styles.activeCircle : ""
-                    }`}
-                  ></span>
-                </div>
-                <div className={styles.titleWrapper}>
-                  <div className={styles.title}>Hobby</div>
-                </div>
-              </div>
+              <span
+                className={`${styles.circle} ${
+                  activeStep === "Confirm" ? styles.activeCircle : ""
+                }`}
+              ></span>
+            </div>
+            <div className={styles.titleWrapper}>
+              <div className={styles.title}>Confirm</div>
             </div>
           </li>
         </ul>
-        <span className={styles.x} onClick={handleCloseStepper}>
-          X
-        </span>
+        <IconButton
+          className={styles.x}
+          size="large"
+          onClick={handleCloseStepper}
+          disableRipple
+        >
+          <CloseIcon />
+        </IconButton>
       </div>
       <div className={styles.contentsRow}>
-        {/* <LoadingSpinner></LoadingSpinner> */}
         {loading ? <LoadingSpinner></LoadingSpinner> : null}
 
         <ActiveStepContents

@@ -8,73 +8,62 @@
     width: 50%;
   }
 }
-.modalOverlay {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 85%;
-  backdrop-filter: blur(3px);
-}
-.numbers {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
 
-  .postContainer {
-    grid-column: 2;
-    grid-row: 1;
+.app {
+  position: relative;
+  max-width: 40%;
+  max-height: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  .card {
+    position: relative;
   }
-  .leftSide {
-    grid-column: 1;
+  .annotation {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: end;
-    margin-right: 1rem;
-    .selector3 {
-      .container {
-        .numberWrapper {
-          .line {
-            background-color: green;
-          }
-        }
-      }
-    }
-  }
-  .rightSide {
-    grid-column: 3;
-    display: flex;
-    justify-content: start;
     align-items: center;
-    margin-left: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  .annotation01 {
+    bottom: 845px;
+    left: -273px;
+  }
+  .annotation02 {
+    bottom: 600px;
+    right: -273px;
+  }
+  .annotation03 {
+    bottom: 175px;
+    left: -273px;
   }
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #333;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+@media screen and (max-width: 640px) and (orientation: portrait) {
+  .annotation01 {
   }
 }
+@media only screen and (max-width: 1800px) {
+  .annotation01 {
+    background-color: aqua;
+    bottom: 904px !important;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .annotation01 {
+    background-color: aqua;
+    bottom: 1000px !important;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .annotation01 {
+    background-color: aqua;
+    bottom: 1100px !important;
+    transform: scale(0.8);
+  }
+}
+// 360 x 640px (small mobile device screen): 10.10%
 
-.selector1 {
-  margin-bottom: 16rem;
-}
+// 1366 x 768px (average laptop screen): 9.3%
 
-.selector2 {
-  margin-bottom: 14rem;
-}
-.selector3 {
-  margin-bottom: 5rem;
-}
+// 1920 x 1080px (large desktop screen): 8.35%

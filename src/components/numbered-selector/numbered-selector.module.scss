@@ -1,11 +1,7 @@
-.container {
-  .asd {
-    font-family: "GeistMono";
-    display: flex;
-    padding: 0px 8px;
-    margin: 0 6px;
-    cursor: pointer;
-  }
+.numberedSelector {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 
   .numberWrapper {
     display: flex;
@@ -38,7 +34,18 @@
     }
 
     .flipLine {
-      transform: scaleX(-1);
+      transform: scaleX(-1) translateY(-24px);
     }
+    .transform {
+      transform: translateY(-30px);
+    }
+  }
+
+  .text {
+    font-family: "GeistMono";
+    display: flex;
+    padding: 0px 8px;
+    margin: 0 6px;
+    cursor: pointer;
   }
 }

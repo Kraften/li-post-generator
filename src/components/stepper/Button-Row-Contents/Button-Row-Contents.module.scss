@@ -13,4 +13,7 @@
     transform: scale(2);
     color: var(--primary-green);
   }
+  .saveButton:hover {
+    color: var(--hover-green);
+  }
 }

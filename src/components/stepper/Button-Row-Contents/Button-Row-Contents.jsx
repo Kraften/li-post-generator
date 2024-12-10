@@ -6,6 +6,7 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { STEPS } from "./../../../constants/constants";
 import chatStore from "./../../../store/chatStore";
 import { SECTION } from "../../../constants/constants";
+
 const ButtonRowContents = ({
   activeStep,
   handleSendHobbyQuestion,

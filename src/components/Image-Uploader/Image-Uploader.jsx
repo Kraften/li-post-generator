@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import html2canvas from "html2canvas";
 import styles from "./Image-Uploader.module.scss";
 import chatStore from "../../store/chatStore";
-import { SECTION, STEPS } from "../../constants/constants.js";
+import { SECTION } from "../../constants/constants.js";
+import mainLogo from "/sigma_logo_black.png";
+import { DndContext } from "@dnd-kit/core";
+import DraggableLogo from "./Draggable-Logo/Draggable-Logo";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const ImageUploaderWithLogo = () => {
-  const [image2, setImage] = useState(null);
-  const [logo, setLogo] = useState(null);
-  const [logoPosition, setLogoPosition] = useState({ top: 50, left: 50 });
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [logoPosition, setLogoPosition] = useState({ top: 130, left: 700 });
   const updateImage = chatStore((state) => state.updateImage);
   const updateSelectedState = chatStore((state) => state.updateSelectedState);
 
@@ -15,80 +20,80 @@ const ImageUploaderWithLogo = () => {
     const file = e.target.files[0];
     if (file) {
       updateImage(URL.createObjectURL(file));
-      setImage(URL.createObjectURL(file));
+      setUploadedImage(URL.createObjectURL(file));
     }
   };
-
-  const handleLogoUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setLogo(URL.createObjectURL(file));
-    }
-  };
-
-  const handleDrag = (e) => {
-    const parent = e.target.parentNode.getBoundingClientRect();
-    const x = Math.min(
-      Math.max(0, e.clientX - parent.left),
-      parent.width - e.target.offsetWidth
-    );
-    const y = Math.min(
-      Math.max(0, e.clientY - parent.top),
-      parent.height - e.target.offsetHeight
-    );
-    setLogoPosition({ top: y, left: x });
-  };
-
-  const saveImage = () => {
+  const saveImageToState = () => {
     const element = document.getElementById("output-container");
     html2canvas(element, { useCORS: true, scale: 2 }).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = "combined-image.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
+      const dataURL = canvas.toDataURL("image/png");
+      updateImage(dataURL);
     });
+    handleCloseModal();
   };
-  const handleCloseStepper = () => {
+
+  const handleDragEnd = (event) => {
+    const { delta } = event;
+    setLogoPosition((prev) => ({
+      top: prev.top + delta.y,
+      left: prev.left + delta.x,
+    }));
+  };
+
+  const handleCloseModal = () => {
     updateSelectedState(SECTION.NONE);
   };
+
   return (
     <div className={styles.containerz}>
       <div className={`${styles.headerWrapper} flexRow`}>
         <h2 className={styles.header}>Upload Image and Add Logo</h2>
-        <span className={styles.x} onClick={handleCloseStepper}>
-          X
-        </span>
+        <IconButton
+          className={styles.x}
+          size="large"
+          onClick={handleCloseModal}
+          disableRipple
+        >
+          <CloseIcon />
+        </IconButton>
       </div>
       <div>
         <label className={styles.fileInput}>
           Upload Background Image:
           <input type="file" accept="image/*" onChange={handleImageUpload} />
         </label>
-        <br />
-        <label className={styles.fileInput}>
-          Upload Logo:
-          <input type="file" accept="image/*" onChange={handleLogoUpload} />
-        </label>
       </div>
-      {image2 && (
-        <div id="output-container" className={styles.outputContainer}>
-          <img src={image2} alt="Uploaded" className={styles.uploadedImage} />
-          {logo && (
-            <img
-              src={logo}
-              alt="Logo"
-              draggable
-              onDragEnd={handleDrag}
-              style={{ top: 420, left: 450 }}
-              className={styles.logoImage}
-            />
-          )}
-        </div>
+
+      {uploadedImage && (
+        <>
+          <span>The logo can be moved around.</span>
+          <DndContext onDragEnd={handleDragEnd}>
+            <div id="output-container" className={styles.outputContainer}>
+              <img
+                className={styles.uploadedImage}
+                src={uploadedImage}
+                alt="Background"
+              />
+              <DraggableLogo
+                logo={mainLogo}
+                position={logoPosition}
+                setPosition={setLogoPosition}
+              />
+            </div>
+          </DndContext>
+        </>
       )}
-      {image2 && (
-        <button onClick={saveImage} className={styles.saveButton}>
-          Save Image
-        </button>
+      {uploadedImage && (
+        <div className={styles.buttonRow}>
+          <IconButton
+            className={styles.saveButton}
+            size="large"
+            onClick={saveImageToState}
+            disableRipple
+          >
+            <CheckCircleIcon />
+          </IconButton>
+        </div>
       )}
     </div>
   );

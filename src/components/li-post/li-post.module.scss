@@ -7,14 +7,6 @@
   grid-template-rows: auto 1fr auto;
   padding: 2rem;
 
-  // .linkedinPost::before {
-  //   background-color: rgba(35, 35, 35, 1);
-  //   content: "";
-  //   filter: blur(18px);
-  //   position: absolute;
-  //   inset: 10%;
-  //   z-index: -1;
-  // }
   .modalOverlay {
     position: absolute;
     left: 0;
@@ -98,12 +90,15 @@
     .imageContainer {
       grid-row: 2;
       width: 700px;
+      height: 450px;
       background-color: #bdbdbd;
       border-radius: var(--card-border-radius);
       font-weight: 700;
 
       .postImage {
         border-radius: var(--card-border-radius);
+        max-width: 700px;
+        max-height: 450px;
       }
     }
   }
