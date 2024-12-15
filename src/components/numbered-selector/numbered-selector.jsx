@@ -24,7 +24,7 @@ const NumberedSelector = ({ section, selectSection, style }) => {
   return (
     <div
       style={style2}
-      className={`${styles.numberedSelector} fadeIn`}
+      className={`${styles.numberedSelector} fadeIn `}
       onClick={handleSectionClick}
     >
       <li className={`${styles.numberWrapper}`}>

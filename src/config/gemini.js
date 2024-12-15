@@ -1,8 +1,4 @@
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -33,21 +29,19 @@ function extractBulletPointsAndHeaders(text) {
 
   // Extract headers first
   while ((match = headerRegex.exec(text)) !== null) {
-    headers.push(match[1].trim()); // Capture header content and trim extra spaces
+    headers.push(match[1].trim());
   }
 
   // Extract bullet points
   let pointsMatch;
   while ((pointsMatch = bulletPointRegex.exec(text)) !== null) {
-    bulletPoints.push(pointsMatch[1].trim()); // Capture bullet point text
+    bulletPoints.push(pointsMatch[1].trim());
   }
 
-  // Combine headers with bullet points: associate the header with the subsequent bullet points
   const structuredPoints = [];
   let headerIndex = 0;
 
   bulletPoints.forEach((point, index) => {
-    // If we've reached a new header, update the current header
     if (headers[headerIndex] && index === headerIndex) {
       structuredPoints.push({
         header: headers[headerIndex],

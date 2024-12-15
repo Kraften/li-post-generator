@@ -8,6 +8,7 @@ import chatStore from "./../../../store/chatStore";
 import { SECTION } from "../../../constants/constants";
 
 const ButtonRowContents = ({
+  isDisabled,
   activeStep,
   handleSendHobbyQuestion,
   handleSendPerksQuestion,
@@ -22,10 +23,17 @@ const ButtonRowContents = ({
       case STEPS.HOBBY:
         return (
           <IconButton
+            disabled={isDisabled ? true : false}
             className={styles.nextButton}
             size="large"
             onClick={handleSendHobbyQuestion}
             disableRipple
+            sx={{
+              "&.Mui-disabled": {
+                background: "white",
+                color: "var(--disabled-grey)",
+              },
+            }}
           >
             <ArrowCircleRightIcon />
           </IconButton>
@@ -63,6 +71,7 @@ const ButtonRowContents = ({
 export default ButtonRowContents;
 
 ButtonRowContents.propTypes = {
+  isDisabled: PropTypes.bool,
   activeStep: PropTypes.string,
   handleSendPerksQuestion: PropTypes.func,
   handleSendHobbyQuestion: PropTypes.func,

@@ -5,7 +5,6 @@
   justify-content: center;
   align-items: center;
   p {
-    width: 50%;
   }
 }
 
@@ -15,55 +14,21 @@
   max-height: 40%;
   margin: 0 auto;
   padding: 20px;
-  .card {
-    position: relative;
-  }
-  .annotation {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-  }
-  .annotation01 {
-    bottom: 845px;
-    left: -273px;
-  }
-  .annotation02 {
-    bottom: 600px;
-    right: -273px;
-  }
-  .annotation03 {
-    bottom: 175px;
-    left: -273px;
-  }
 }
 
 @media screen and (max-width: 640px) and (orientation: portrait) {
-  .annotation01 {
+  .app {
+    max-width: 100%;
+  }
+  .header {
+    font-family: "GeistMono";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      width: 30%;
+      margin-bottom: 2rem;
+    }
   }
 }
-@media only screen and (max-width: 1800px) {
-  .annotation01 {
-    background-color: aqua;
-    bottom: 904px !important;
-  }
-}
-@media only screen and (max-width: 1500px) {
-  .annotation01 {
-    background-color: aqua;
-    bottom: 1000px !important;
-  }
-}
-@media only screen and (max-width: 1300px) {
-  .annotation01 {
-    background-color: aqua;
-    bottom: 1100px !important;
-    transform: scale(0.8);
-  }
-}
-// 360 x 640px (small mobile device screen): 10.10%
-
-// 1366 x 768px (average laptop screen): 9.3%
-
-// 1920 x 1080px (large desktop screen): 8.35%

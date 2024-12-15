@@ -3,10 +3,13 @@
   margin: 1rem;
   .nextButton {
     transform: scale(2.5);
-    color: var(--primary-green) !important;
+    color: var(--primary-green);
     width: fit-content;
     height: fit-content;
     padding: 0;
+    &:hover {
+      transform: scale(3);
+    }
   }
   .saveButton {
     position: relative;

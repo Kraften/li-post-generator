@@ -6,14 +6,26 @@
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   --card-border-radius: 8px;
 }
+:global {
+  @keyframes sxa {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .sxa :local {
+    animation: sxa 1s infinite linear;
+  }
+}
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 body {
-  margin: 2rem;
-  height: 100dvh;
+  // margin: 2rem;
 }
 
 .blur {
@@ -52,17 +64,54 @@ body {
   justify-content: flex-end;
 }
 
-.fadeIn {
-  animation: fadeIn 1000ms ease-in-out forwards;
-}
+// .fadeIn {
+//   animation: fadeIn 1000ms ease-in-out forwards;
+// }
 // .boxShadowRevel {
 //   animation: boxShadowRevel 1000ms ease-in-out forwards;
 // }
+
+.absoluteWithBlur {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  backdrop-filter: blur(3px);
+}
+
+.breakOut {
+  width: 100vw;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
 
 @font-face {
   font-family: "GeistMono";
   src: local("RubikScribble-Regular"),
     url("./assets/fonts/GeistMono-VariableFont_wght.ttf");
+}
+
+:global {
+  .fadeInAnimation {
+    &:local {
+      animation: 200ms fadeIn;
+    }
+  }
+  .boxShadowRevelAnimation {
+    &:local {
+      animation: 200ms boxShadowRevel;
+    }
+  }
+  .scaleUpAnimation {
+    &:local {
+      animation: scaleUp 500ms ease-in-out forwards;
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -80,5 +129,13 @@ body {
   }
   100% {
     box-shadow: var(--selected-box-shadow);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+  }
+  100% {
+    transform: scale(1.2);
   }
 }
