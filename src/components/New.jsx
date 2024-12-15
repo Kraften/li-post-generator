@@ -3,8 +3,8 @@ import { TextareaAutosize } from "@mui/base";
 import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import styles from "./New.module.scss";
-
 import { SECTION } from "../constants/constants";
+
 import ImageUploaderWithLogo from "./Image-Uploader/Image-Uploader";
 import StepperComponent from "./Stepper/Stepper";
 import chatStore from "./../store/chatStore";
@@ -100,11 +100,6 @@ const New = () => {
         return null;
     }
   };
-
-  useEffect(() => {
-    setBody(breadTextList);
-    console.log(selectedState);
-  }, [breadTextList]);
 
   return (
     <div className={styles.wrapper}>

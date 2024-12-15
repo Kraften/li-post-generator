@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow-x: clip;
+  margin: 1rem;
 
   .header {
     font-family: "GeistMono";
@@ -83,17 +85,17 @@
           }
 
           .annotation01 {
-            left: 80%;
+            left: 70%;
             top: 3%;
           }
           .annotation02 {
             display: flex;
             justify-content: end;
-            left: 20%;
+            left: 30%;
             top: 23%;
           }
           .annotation03 {
-            left: 80%;
+            left: 70%;
             bottom: 20%;
             display: flex;
             justify-content: start;
