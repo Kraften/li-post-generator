@@ -1,12 +1,11 @@
 .stepper {
   display: grid;
-  position: absolute;
   max-height: 800px;
   min-width: 550px;
   grid-template-rows: 1fr 4fr 0.5fr;
-  background-color: white;
-  box-shadow: var(--selected-box-shadow);
-  border-radius: var(--card-border-radius);
+  // background-color: white;
+  // box-shadow: var(--selected-box-shadow);
+  // border-radius: var(--card-border-radius);
   font-family: "GeistMono";
 
   .stepsRowWrapper {
@@ -116,15 +115,7 @@
   left: 50%;
   animation: rotate 1s linear infinite;
 }
-.modalOverlay {
-  position: absolute;
-  z-index: 1;
-  left: 1%;
-  top: 17%;
-  width: 680px;
-  height: 83%;
-  backdrop-filter: blur(10px);
-}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

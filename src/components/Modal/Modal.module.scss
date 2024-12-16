@@ -1,0 +1,25 @@
+.moda {
+  position: absolute;
+  top: 99px;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: var(--selected-box-shadow);
+  border-radius: var(--card-border-radius);
+  background-color: white;
+  .close {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.scaleUp {
+  animation: scale 500ms ease-in-out forwards;
+}
+
+@keyframes scale {
+  0% {
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}

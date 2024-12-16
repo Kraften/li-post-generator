@@ -1,7 +1,7 @@
 import styles from "./numbered-selector.module.scss";
 import PropTypes from "prop-types";
 
-const NumberedSelector = ({ section, selectSection, style }) => {
+const NumberedSelector = ({ section, selectSection }) => {
   const svgLine = () => {
     return (
       <svg width="130" height="60">
@@ -18,13 +18,10 @@ const NumberedSelector = ({ section, selectSection, style }) => {
   const handleSectionClick = () => {
     selectSection(section.sectionNumber);
   };
-  const style2 = {
-    ...style,
-  };
+
   return (
     <div
-      style={style2}
-      className={`${styles.numberedSelector} fadeIn `}
+      className={`${styles.numberedSelector} fadeIn`}
       onClick={handleSectionClick}
     >
       <li className={`${styles.numberWrapper}`}>

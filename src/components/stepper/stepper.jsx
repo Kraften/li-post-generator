@@ -52,7 +52,7 @@ const StepperComponent = () => {
     const continuousString = selectedListItems
       .map((item) => `${item.header}: ${item.bulletPoint}`)
       .join(" ");
-    const perksQuestion = `Write a 200-word text about a person with these skills: ${continuousString}`;
+    const perksQuestion = `Write a 200 word text about a person with these skills: ${continuousString}`;
     const answer = await fetchAIResponse(perksQuestion);
     updateBreadTextList(answer);
     setActiveStep(nextStep);
@@ -105,14 +105,6 @@ const StepperComponent = () => {
             />
           ))}
         </ul>
-        <IconButton
-          className={styles.x}
-          size="large"
-          onClick={handleCloseStepper}
-          disableRipple
-        >
-          <CloseIcon />
-        </IconButton>
       </div>
       <div className={styles.contentsRow}>
         <div className={styles.loading}></div>

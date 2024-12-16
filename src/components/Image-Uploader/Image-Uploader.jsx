@@ -70,18 +70,8 @@ const ImageUploaderWithLogo = () => {
   };
 
   return (
-    <div className={styles.containerz}>
-      <div className={`${styles.headerWrapper} flexRow`}>
-        <h2 className={styles.header}>Upload Image and Add Logo</h2>
-        <IconButton
-          className={styles.x}
-          size="large"
-          onClick={handleCloseModal}
-          disableRipple
-        >
-          <CloseIcon />
-        </IconButton>
-      </div>
+    <div className={styles.imageUploadComponent}>
+      <div className={`${styles.headerWrapper} flexRow`}></div>
       <div>
         <label className={styles.fileInput}>
           Upload Background Image:
@@ -92,7 +82,7 @@ const ImageUploaderWithLogo = () => {
         <div className={styles.logoPicker}>
           <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
             <Typography>Black</Typography>
-            <Switch onChange={handleFeedbackChange} inputProps={{}} />
+            <Switch onChange={handleFeedbackChange} />
             <Typography>White</Typography>
           </Stack>
 
