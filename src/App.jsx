@@ -1,9 +1,8 @@
-import New from "./components/New";
-
+import LinkedInPostPage from "./Pages/LinkedInPostPage/LinkedInPostPage";
 const App = () => {
   return (
     <main>
-      <New></New>
+      <LinkedInPostPage></LinkedInPostPage>
     </main>
   );
 };

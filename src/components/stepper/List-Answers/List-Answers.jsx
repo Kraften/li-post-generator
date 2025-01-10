@@ -1,14 +1,11 @@
 import { useState } from "react";
-import chatStore from "../../../store/chatStore";
+import postStore from "../../../store/postStore";
 import styles from "./list-answers.module.scss";
 import { PropTypes } from "prop-types";
 
 const ListAnswers = () => {
-  const listAnswer = chatStore((state) => state.listAnswer);
   const [selectedItems, setSelectedItems] = useState([]);
-  const updateSelectedListItems = chatStore(
-    (state) => state.updateSelectedListItems
-  );
+  const { listOfPerks, updateSelectedPerksList } = postStore();
 
   const handleSelectItem = (item) => {
     const isSelected = selectedItems.some(
@@ -23,13 +20,13 @@ const ListAnswers = () => {
       );
     } else {
       setSelectedItems([...selectedItems, item]);
-      updateSelectedListItems(item);
+      updateSelectedPerksList(item);
     }
   };
 
   return (
     <ul className={styles.list}>
-      {listAnswer?.map((item, i) => {
+      {listOfPerks?.map((item, i) => {
         return (
           <li
             onClick={() => handleSelectItem(item)}

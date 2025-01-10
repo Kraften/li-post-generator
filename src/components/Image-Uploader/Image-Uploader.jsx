@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import html2canvas from "html2canvas";
 import styles from "./Image-Uploader.module.scss";
-import chatStore from "../../store/chatStore";
+import postStore from "../../store/postStore.js";
 import { SECTION } from "../../constants/constants.js";
 import sigmaBlackLogo from "/SC-logo_BLACK.png";
 import sigmaWhiteLogo from "/SC-logo_WHITE.png";
@@ -9,7 +9,6 @@ import sigmaEngBlackLogo from "/190425_Engineering_by_SC_tag_BLACK.png";
 import sigmaEngWhiteLogo from "/190425_Engineering_by_SC_tag_WHITE.png";
 import { DndContext } from "@dnd-kit/core";
 import DraggableLogo from "./Draggable-Logo/Draggable-Logo";
-import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Switch from "@mui/material/Switch";
@@ -30,10 +29,10 @@ const logos = {
 const ImageUploaderWithLogo = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [logoPosition, setLogoPosition] = useState({ top: 0, left: 0 });
-  const updateImage = chatStore((state) => state.updateImage);
-  const updateSelectedState = chatStore((state) => state.updateSelectedState);
   const [selectedLogo, setSelectedLogo] = useState("sigmaLogo");
   const [isLogoBlack, setIsLogoBlack] = useState(true);
+
+  const { updateImage, updateSelectedState } = postStore();
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];

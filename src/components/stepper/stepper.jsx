@@ -1,13 +1,12 @@
 import { useState } from "react";
 import styles from "./Stepper.module.scss";
-import chatStore from "../../store/chatStore.js";
+import postStore from "../../store/postStore.js";
 import { run, extractBulletPointsAndHeaders } from "../../config/gemini.js";
 import ActiveStepContents from "./Active-Step-Contents/Active-Step-Contents";
-import { SECTION, STEPS } from "../../constants/constants.js";
+import { STEPS } from "../../constants/constants.js";
 import ButtonRowContents from "./Button-Row-Contents/Button-Row-Contents";
 import { PropTypes } from "prop-types";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
+import userStore from "./../../store/userStore";
 
 const StepperComponent = () => {
   const [activeStep, setActiveStep] = useState(STEPS.HOBBY);
@@ -15,10 +14,18 @@ const StepperComponent = () => {
   const [loading, setLoading] = useState(false);
 
   const [chatError, setChatError] = useState("");
-  const updateListAnswer = chatStore((state) => state.updateListAnswer);
-  const selectedListItems = chatStore((state) => state.selectedListItems);
-  const updateSelectedState = chatStore((state) => state.updateSelectedState);
-  const updateBreadTextList = chatStore((state) => state.updateBreadTextList);
+
+  const {
+    user,
+    selectedStep,
+    updateSelectedStep,
+    selectedEditSection,
+    updateSelectedEditSection,
+  } = userStore();
+
+  const { updateListOfPerks, selectedPerksList, updateMainText } = postStore();
+
+  const steps = ["Hobby", "Select Perks", "Confirm"];
 
   const fetchAIResponse = async (prompt) => {
     setLoading(true);
@@ -37,25 +44,33 @@ const StepperComponent = () => {
     setChatError("Something went wrong. Please try again.");
   };
 
-  const handleSendHobbyQuestion = async (nextStep) => {
-    const hobbyQuestion = `the person is a ${questionText} witch skills could he learn that helps in work life`;
-    const answer = await fetchAIResponse(hobbyQuestion);
-    const answersList = extractBulletPointsAndHeaders(answer);
-    const filteredList = answersList.filter(
-      (item) => item.bulletPoint.trim() !== ""
-    );
-    updateListAnswer(filteredList);
-    setActiveStep(nextStep);
+  const fetchAndProcessHobbyQuestion = async (nextStep) => {
+    try {
+      const hobbyQuestion = `the person is a ${user.hobby}, what skills could he learn from that that hobby that helps them in their job as a${user.occupation}?`;
+      const answer = await fetchAIResponse(hobbyQuestion);
+      const answersList = extractBulletPointsAndHeaders(answer);
+      const filteredList = answersList.filter(
+        (item) => item.bulletPoint.trim() !== ""
+      );
+      updateListOfPerks(filteredList);
+      setActiveStep(nextStep);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
-  const handleSendPerksQuestion = async (nextStep) => {
-    const continuousString = selectedListItems
-      .map((item) => `${item.header}: ${item.bulletPoint}`)
-      .join(" ");
-    const perksQuestion = `Write a 200 word text about a person with these skills: ${continuousString}`;
-    const answer = await fetchAIResponse(perksQuestion);
-    updateBreadTextList(answer);
-    setActiveStep(nextStep);
+  const fetchAndProcessPerksQuestion = async (nextStep) => {
+    try {
+      const continuousString = selectedPerksList
+        .map((item) => `${item.header}: ${item.bulletPoint}`)
+        .join(" ");
+      const perksQuestion = `Write a 200 word text about a person with these skills: ${continuousString} that works as a ${user.occupation}.`;
+      const answer = await fetchAIResponse(perksQuestion);
+      updateMainText(answer);
+      setActiveStep(nextStep);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   const LoadingSpinner = () => (
@@ -64,8 +79,6 @@ const StepperComponent = () => {
       <div className={styles.spinner}></div>
     </>
   );
-
-  const steps = ["Hobby", "Select Perks", "Confirm"];
 
   const StepIndicator = ({ step, isActive }) => (
     <li>
@@ -84,14 +97,6 @@ const StepperComponent = () => {
       </div>
     </li>
   );
-
-  const handleQuestionFromChild = (q) => {
-    setQuestionText(q);
-  };
-
-  const handleCloseStepper = () => {
-    updateSelectedState(SECTION.NONE);
-  };
 
   return (
     <div className={styles.stepper}>
@@ -112,7 +117,6 @@ const StepperComponent = () => {
 
         <ActiveStepContents
           activeStep={activeStep}
-          handleQuestionFromChild={handleQuestionFromChild}
           chatError={chatError}
         ></ActiveStepContents>
       </div>
@@ -120,8 +124,12 @@ const StepperComponent = () => {
         <ButtonRowContents
           isDisabled={loading}
           activeStep={activeStep}
-          handleSendHobbyQuestion={() => handleSendHobbyQuestion(STEPS.PERKS)}
-          handleSendPerksQuestion={() => handleSendPerksQuestion(STEPS.CONFIRM)}
+          handleSendHobbyQuestion={() =>
+            fetchAndProcessHobbyQuestion(STEPS.PERKS)
+          }
+          handleSendPerksQuestion={() =>
+            fetchAndProcessPerksQuestion(STEPS.CONFIRM)
+          }
         ></ButtonRowContents>
       </div>
     </div>

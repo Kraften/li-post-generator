@@ -1,14 +1,26 @@
-.textInput {
-  padding: 1rem;
-  width: 100%;
-}
 .wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
   overflow-x: clip;
-  margin: 1rem;
 
+  .aaaq {
+    position: relative;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    .aaaabsolute {
+      position: absolute;
+      width: 100dvw;
+      height: 100dvh;
+      backdrop-filter: blur(3px);
+      .close {
+        display: flex;
+        justify-content: end;
+        margin: 5rem;
+      }
+    }
+  }
   .header {
     font-family: "GeistMono";
     display: flex;
@@ -34,6 +46,7 @@
       max-width: 35%;
       grid-template-rows: auto 1fr auto;
       padding: 2rem;
+      margin: 2rem 0;
       p {
         cursor: pointer;
       }
@@ -82,11 +95,7 @@
           }
           .annotation02 {
             right: -291px;
-            top: 37%;
-          }
-          .annotation03 {
-            bottom: 139px;
-            left: -280px;
+            top: 70%;
           }
 
           p {
@@ -180,83 +189,10 @@
   }
 }
 
-// @media only screen and (max-width: 2200px) {
-//   .annotation01 {
-//     left: 62% !important;
-//     top: 6%;
-//   }
-//   .annotation02 {
-//     display: flex;
-//     justify-content: end;
-//     left: 38% !important;
-//     top: 33%;
-//   }
-//   .annotation03 {
-//     left: 62% !important;
-//     bottom: 20%;
-//   }
-// }
-// @media only screen and (max-width: 1700px) {
-//   .annotation01 {
-//     left: 60% !important;
-//     top: 6%;
-//   }
-//   .annotation02 {
-//     display: flex;
-//     justify-content: end;
-//     left: 40% !important;
-//     top: 33%;
-//   }
-//   .annotation03 {
-//     left: 60% !important;
-//     bottom: 20%;
-//   }
-// }
-// @media only screen and (max-width: 1500px) {
-//   .annotation01 {
-//     left: 58% !important;
-//     top: 6%;
-//   }
-//   .annotation02 {
-//     display: flex;
-//     justify-content: end;
-//     left: 42% !important;
-//     top: 33%;
-//   }
-//   .annotation03 {
-//     left: 58% !important;
-//     bottom: 20%;
-//   }
-// }
-// @media only screen and (max-width: 1300px) {
-//   .annotation01 {
-//     left: 54% !important;
-//   }
-//   .annotation02 {
-//     left: 46% !important;
-//   }
-//   .annotation03 {
-//     left: 54% !important;
-//   }
-// }
-
-// @media only screen and (max-width: 1100px) {
-//   .annotation01 {
-//     left: 51% !important;
-//   }
-//   .annotation02 {
-//     left: 49% !important;
-//   }
-//   .annotation03 {
-//     left: 51% !important;
-//   }
-// }
-// // TODO: REMOVE Lines at this width?
-// @media only screen and (max-width: 1000px) {
-//   .annotation01 {
-//   }
-//   .annotation02 {
-//   }
-//   .annotation03 {
-//   }
-// }
+.saveButton {
+  background-color: var(--primary-green);
+  border-radius: var(--card-border-radius);
+  border: none;
+  color: white;
+  padding: 1rem;
+}

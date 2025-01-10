@@ -4,8 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { STEPS } from "./../../../constants/constants";
-import chatStore from "./../../../store/chatStore";
 import { SECTION } from "../../../constants/constants";
+import userStore from "../../../store/userStore";
 
 const ButtonRowContents = ({
   isDisabled,
@@ -13,10 +13,10 @@ const ButtonRowContents = ({
   handleSendHobbyQuestion,
   handleSendPerksQuestion,
 }) => {
-  const updateSelectedState = chatStore((state) => state.updateSelectedState);
+  const { updateSelectedStep } = userStore();
 
   const handleSaveAndClose = () => {
-    updateSelectedState(SECTION.NONE);
+    updateSelectedStep(SECTION.NONE);
   };
   const buttonRowSwitcher = () => {
     switch (activeStep) {

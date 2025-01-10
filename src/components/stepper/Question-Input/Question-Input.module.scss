@@ -1,14 +1,12 @@
 .questionWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0rem 8rem;
-  height: 70%;
+  width: 100%;
 
   .input {
-    width: 40dvw;
     font-size: 30em;
-    font-size: 60px;
   }
 
   span {

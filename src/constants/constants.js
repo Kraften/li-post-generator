@@ -8,5 +8,11 @@ export const SECTION = {
   NONE: "00",
   FIRST: "01",
   SECOND: "02",
-  THIRD: "03",
+};
+
+export const EDIT_SECTION = {
+  NONE: "none",
+  INTRO_TEXT: "intro",
+  MAIN_TEXT: "main",
+  IMAGE: "image",
 };

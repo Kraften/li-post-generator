@@ -15,39 +15,41 @@ const NumberedSelector = ({ section, selectSection }) => {
     );
   };
 
-  const handleSectionClick = () => {
-    selectSection(section.sectionNumber);
+  const LeftSide = () => {
+    return (
+      <>
+        <span className={`${styles.number} `}>{section.sectionNumber}</span>
+        <div
+          className={`${styles.line} ${
+            section.sectionNumber !== "01" ? styles.flipLine : null
+          }`}
+        >
+          {svgLine()}
+        </div>
+      </>
+    );
+  };
+
+  const RightSide = () => {
+    return (
+      <>
+        <div
+          className={`${styles.line} ${styles.flipLine} ${styles.transform}`}
+        >
+          {svgLine()}
+        </div>
+        <span className={styles.number}>{section.sectionNumber}</span>
+      </>
+    );
   };
 
   return (
     <div
       className={`${styles.numberedSelector} fadeIn`}
-      onClick={handleSectionClick}
+      onClick={() => selectSection(section.sectionNumber)}
     >
       <li className={`${styles.numberWrapper}`}>
-        {section.isNumberLeft ? (
-          <span className={`${styles.number} `}>{section.sectionNumber}</span>
-        ) : null}
-        {!section.isNumberLeft ? (
-          <div
-            className={`${styles.line} ${styles.flipLine} ${styles.transform}`}
-          >
-            {svgLine()}
-          </div>
-        ) : null}
-
-        {section.isNumberLeft ? (
-          <div
-            className={`${styles.line} ${
-              section.sectionNumber !== "01" ? styles.flipLine : null
-            }`}
-          >
-            {svgLine()}
-          </div>
-        ) : null}
-        {!section.isNumberLeft ? (
-          <span className={styles.number}>{section.sectionNumber}</span>
-        ) : null}
+        {section.isNumberLeft ? LeftSide() : RightSide()}
       </li>
       <span
         className={`${styles.text} ${!section.isNumberLeft ? "flexEnd" : ""}`}

@@ -3,22 +3,14 @@
   max-height: 800px;
   min-width: 550px;
   grid-template-rows: 1fr 4fr 0.5fr;
-  // background-color: white;
-  // box-shadow: var(--selected-box-shadow);
-  // border-radius: var(--card-border-radius);
   font-family: "GeistMono";
 
   .stepsRowWrapper {
     display: grid;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
-    .x {
-      cursor: pointer;
-      justify-content: end;
-      align-items: baseline;
-    }
+
     .stepsRow {
-      margin-top: 1rem;
       display: grid;
       grid-column: 2;
       grid-template-columns: repeat(3, auto);
@@ -27,17 +19,20 @@
         margin: 1rem 0;
         display: grid;
         grid-template-columns: repeat(2, auto);
+
         .circleWrapper {
           display: flex;
           justify-content: center;
           align-items: center;
           grid-column: 1;
+
           .circle {
             width: 30px;
             height: 30px;
             border-radius: 25px;
             background-color: var(--disabled-grey);
           }
+
           .activeCircle {
             width: 30px;
             height: 30px;
@@ -53,6 +48,7 @@
           align-items: center;
           grid-column: 2;
           z-index: 1;
+
           .line {
             width: 60px;
             height: 3px;
@@ -63,6 +59,7 @@
       li:last-child {
         display: grid;
         grid-template-columns: repeat(1, 45px);
+
         .circleWrapper {
           grid-row: 1;
         }
@@ -88,10 +85,8 @@
 
 .contentsRow {
   position: relative;
-  margin: 1rem;
   overflow: auto;
-  .loading {
-  }
+
   ul {
     padding: 0rem 2rem;
   }
