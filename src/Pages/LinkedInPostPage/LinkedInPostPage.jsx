@@ -15,12 +15,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { capitalizeFirstLetter } from "./../../utils/utils";
 
 const LinkedInPostPage = () => {
-  const { user, setUser } = userStore();
-
   const { image, mainText, introText, isHelpOpen, updateIsHelpOpen } =
     postStore();
-
   const {
+    user,
     selectedStep,
     updateSelectedStep,
     selectedEditSection,

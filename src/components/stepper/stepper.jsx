@@ -9,23 +9,16 @@ import { PropTypes } from "prop-types";
 import userStore from "./../../store/userStore";
 
 const StepperComponent = () => {
-  const [activeStep, setActiveStep] = useState(STEPS.HOBBY);
-  const [questionText, setQuestionText] = useState("");
+  const [activeStep, setActiveStep] = useState(STEPS.INFO);
   const [loading, setLoading] = useState(false);
 
   const [chatError, setChatError] = useState("");
 
-  const {
-    user,
-    selectedStep,
-    updateSelectedStep,
-    selectedEditSection,
-    updateSelectedEditSection,
-  } = userStore();
+  const { user } = userStore();
 
   const { updateListOfPerks, selectedPerksList, updateMainText } = postStore();
 
-  const steps = ["Hobby", "Select Perks", "Confirm"];
+  const steps = ["Info", "Select Perks", "Confirm"];
 
   const fetchAIResponse = async (prompt) => {
     setLoading(true);

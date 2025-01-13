@@ -20,7 +20,7 @@ const ButtonRowContents = ({
   };
   const buttonRowSwitcher = () => {
     switch (activeStep) {
-      case STEPS.HOBBY:
+      case STEPS.INFO:
         return (
           <IconButton
             disabled={isDisabled ? true : false}

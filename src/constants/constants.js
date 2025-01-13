@@ -1,5 +1,5 @@
 export const STEPS = {
-  HOBBY: "Hobby",
+  INFO: "Info",
   PERKS: "Select Perks",
   CONFIRM: "Confirm",
 };

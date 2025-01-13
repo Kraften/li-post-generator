@@ -7,7 +7,7 @@ import BreadTextStep from "../Bread-Text-Step/Bread-Text-Step";
 const ActiveStepContents = ({ activeStep, chatError }) => {
   const stepContentSwitcher = () => {
     switch (activeStep) {
-      case STEPS.HOBBY:
+      case STEPS.INFO:
         return <QuestionInput chatError={chatError}></QuestionInput>;
       case STEPS.PERKS:
         return <ListAnswers></ListAnswers>;
