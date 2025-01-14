@@ -3,8 +3,8 @@ import JSZip from "jszip";
 import styles from "./LinkedInPostPage.module.scss";
 import { SECTION } from "../../constants/constants";
 import ImageUploaderWithLogo from "../../components/Image-Uploader/Image-Uploader";
-import StepperComponent from "../../components/Stepper/Stepper";
 import postStore from "../../store/postStore";
+import StepperComponent from "../../components/Stepper/Stepper.jsx";
 import userStore from "../../store/userStore";
 import NumberedSelector from "../../components/Numbered-Selector/Numbered-selector";
 import ModalComponent from "../../components/Modal/Modal";
@@ -15,6 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { capitalizeFirstLetter } from "./../../utils/utils";
 
 const LinkedInPostPage = () => {
+  const {} = userStore();
   const { image, mainText, introText, isHelpOpen, updateIsHelpOpen } =
     postStore();
   const {
