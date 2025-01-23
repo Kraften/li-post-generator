@@ -1,27 +1,30 @@
-import { useState } from "react";
-import postStore from "../../../store/postStore";
-import styles from "./list-answers.module.scss";
+import { useState, useEffect } from "react";
 import { PropTypes } from "prop-types";
 
-const ListAnswers = () => {
+import styles from "./list-answers.module.scss";
+import postStore from "../../../store/postStore";
+
+const ListAnswers = ({ passSelectedItems }) => {
   const [selectedItems, setSelectedItems] = useState([]);
-  const { listOfPerks, updateSelectedPerksList } = postStore();
+  const { listOfPerks, updateSelectedPerksList, selectedPerksList } =
+    postStore();
 
   const handleSelectItem = (item) => {
     const isSelected = selectedItems.some(
       (selectedItem) => selectedItem.bulletPoint === item.bulletPoint
     );
 
+    let updatedItems;
     if (isSelected) {
-      setSelectedItems(
-        selectedItems.filter(
-          (selectedItem) => selectedItem.bulletPoint !== item.bulletPoint
-        )
+      updatedItems = selectedItems.filter(
+        (selectedItem) => selectedItem.bulletPoint !== item.bulletPoint
       );
     } else {
-      setSelectedItems([...selectedItems, item]);
-      updateSelectedPerksList(item);
+      updatedItems = [...selectedItems, item];
     }
+
+    setSelectedItems(updatedItems);
+    updateSelectedPerksList(updatedItems);
   };
 
   return (

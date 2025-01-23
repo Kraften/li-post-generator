@@ -1,20 +1,7 @@
 .imageUploadComponent {
   display: grid;
   grid-template-rows: auto;
-
   font-family: "GeistMono";
-  .logoControls {
-    display: flex;
-    justify-content: space-between;
-    .logoPicker {
-      display: flex;
-      gap: 1rem;
-      margin: 1rem 0;
-      img {
-        cursor: pointer;
-      }
-    }
-  }
 
   .fileInput {
     grid-row: 2;
@@ -34,6 +21,7 @@
       height: 100%;
     }
     .uploadedImage {
+      border-radius: 7px;
       min-width: 100%;
       min-height: 100%;
     }

@@ -32,9 +32,13 @@ body {
   flex-direction: row;
 }
 
-.flexCol {
+.flexColumn {
   display: flex;
   flex-direction: column;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .flexCenter {

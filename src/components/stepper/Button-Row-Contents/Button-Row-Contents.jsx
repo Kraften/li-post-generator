@@ -6,24 +6,36 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { STEPS } from "./../../../constants/constants";
 import { SECTION } from "../../../constants/constants";
 import userStore from "../../../store/userStore";
+import { useEffect } from "react";
+import postStore from "../../../store/postStore";
 
 const ButtonRowContents = ({
   isDisabled,
+  isLoading,
   activeStep,
   handleSendHobbyQuestion,
   handleSendPerksQuestion,
+  selectedPerkItems,
 }) => {
   const { updateSelectedStep } = userStore();
+  const { selectedPerksList } = postStore();
 
   const handleSaveAndClose = () => {
     updateSelectedStep(SECTION.NONE);
   };
+
+  useEffect(() => {
+    if (selectedPerksList.length === 0) {
+      console.log("The selectedPerksList list is empty.");
+    }
+  }, [selectedPerksList]);
+
   const buttonRowSwitcher = () => {
     switch (activeStep) {
       case STEPS.INFO:
         return (
           <IconButton
-            disabled={isDisabled ? true : false}
+            disabled={!isDisabled || isLoading}
             className={styles.nextButton}
             size="large"
             onClick={handleSendHobbyQuestion}
@@ -42,6 +54,7 @@ const ButtonRowContents = ({
       case STEPS.PERKS:
         return (
           <IconButton
+            disabled={selectedPerksList.length === 0}
             className={styles.nextButton}
             size="large"
             onClick={handleSendPerksQuestion}
@@ -71,8 +84,10 @@ const ButtonRowContents = ({
 export default ButtonRowContents;
 
 ButtonRowContents.propTypes = {
+  isLoading: PropTypes.bool,
   isDisabled: PropTypes.bool,
   activeStep: PropTypes.string,
   handleSendPerksQuestion: PropTypes.func,
   handleSendHobbyQuestion: PropTypes.func,
+  selectedPerkItems: PropTypes.array,
 };

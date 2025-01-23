@@ -4,6 +4,8 @@ export const STEPS = {
   CONFIRM: "Confirm",
 };
 
+export const STEPS_LIST = ["Info", "Select Perks", "Confirm"];
+
 export const SECTION = {
   NONE: "00",
   FIRST: "01",

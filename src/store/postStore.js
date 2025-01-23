@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const initialPostState = {
   image: null,
+  editedImage: null,
   isHelpOpen: false,
   listOfPerks: [],
   selectedPerksList: [],
@@ -13,13 +14,14 @@ const postStore = create((set) => ({
   ...initialPostState,
 
   updateImage: (image) => set(() => ({ image: image })),
+  updateEditedImage: (editedImage) => set(() => ({ editedImage: editedImage })),
   updateIsHelpOpen: (isHelpOpen) => set(() => ({ isHelpOpen: isHelpOpen })),
   updateIntroText: (introText) => set(() => ({ introText: introText })),
   updateMainText: (mainText) => set(() => ({ mainText: mainText })),
   updateListOfPerks: (listOfPerks) => set(() => ({ listOfPerks: listOfPerks })),
   updateSelectedPerksList: (newItem) =>
-    set((state) => ({
-      selectedPerksList: [...state.selectedPerksList, newItem],
+    set(() => ({
+      selectedPerksList: newItem,
     })),
 }));
 

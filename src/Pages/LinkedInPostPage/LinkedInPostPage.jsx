@@ -2,7 +2,7 @@ import JSZip from "jszip";
 
 import styles from "./LinkedInPostPage.module.scss";
 import { SECTION } from "../../constants/constants";
-import ImageUploaderWithLogo from "../../components/Image-Uploader/Image-Uploader";
+import ImageUploaderComponent from "../../components/Image-Uploader/Image-Uploader";
 import postStore from "../../store/postStore";
 import StepperComponent from "../../components/Stepper/Stepper.jsx";
 import userStore from "../../store/userStore";
@@ -13,10 +13,10 @@ import EditTextComponent from "../../components/Edit-Text/Edit-Text";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { capitalizeFirstLetter } from "./../../utils/utils";
+import placeholderImage from "/placeholder.svg";
 
 const LinkedInPostPage = () => {
-  const {} = userStore();
-  const { image, mainText, introText, isHelpOpen, updateIsHelpOpen } =
+  const { editedImage, mainText, introText, isHelpOpen, updateIsHelpOpen } =
     postStore();
   const {
     user,
@@ -52,13 +52,15 @@ const LinkedInPostPage = () => {
   };
 
   const handleDownload = async () => {
-    if (!image) {
+    if (!editedImage) {
       alert("Please upload an image first!");
       return;
     }
 
     const zip = new JSZip();
-    zip.file("image-with-logo.png", image.split(",")[1], { base64: true });
+    zip.file("image-with-logo.png", editedImage.split(",")[1], {
+      base64: true,
+    });
     const textContent = `${introText} \n \n ${mainText}`;
     zip.file("post.txt", textContent);
     zip.generateAsync({ type: "blob" }).then((content) => {
@@ -74,15 +76,29 @@ const LinkedInPostPage = () => {
     switch (selectedStep) {
       case SECTION.FIRST:
         return (
-          <ModalComponent scale={true}>
+          <ModalComponent
+            scale={true}
+            titleCenter={true}
+            title={"Personal Information"}
+            helpText={
+              "Enter the desired data, make a few choices and you will generate a personal text about yourself."
+            }
+          >
             <StepperComponent />
           </ModalComponent>
         );
 
       case SECTION.SECOND:
         return (
-          <ModalComponent scale={true} title={"Picture"}>
-            <ImageUploaderWithLogo />
+          <ModalComponent
+            scale={true}
+            titleCenter={true}
+            title={"Picture"}
+            helpText={
+              "Choose a picture that you would like to use for your LinkedIn post. You can also choose which logo to use and where to position it."
+            }
+          >
+            <ImageUploaderComponent />
           </ModalComponent>
         );
       default:
@@ -113,11 +129,16 @@ const LinkedInPostPage = () => {
         );
       case EDIT_SECTION.IMAGE:
         return (
-          <ModalComponent scale={true} title={"Edit Main Text"}>
-            <EditTextComponent
-              text={mainText}
-              section={EDIT_SECTION.IMAGE}
-            ></EditTextComponent>
+          // TODO: Change to edit image component.
+          <ModalComponent
+            scale={true}
+            titleCenter={true}
+            title={"Picture"}
+            helpText={
+              "Choose a picture that you would like to use for your LinkedIn post. You can also choose which logo to use and where to position it."
+            }
+          >
+            <ImageUploaderComponent />
           </ModalComponent>
         );
       default:
@@ -180,20 +201,27 @@ const LinkedInPostPage = () => {
                   />
                 </div>
               ))}
-              <p onClick={handleAboutClick}>{introText}</p>
-              <p onClick={handleBodyClick}>{mainText}</p>
+              <p className="pointer" onClick={handleAboutClick}>
+                {introText}
+              </p>
+              <p className="pointer" onClick={handleBodyClick}>
+                {mainText}
+              </p>
             </div>
-            {image ? (
+            {editedImage ? (
               <div onClick={handleImageClick} className={styles.imageContainer}>
-                <img className={styles.postImage} src={image} width={700}></img>
+                <img
+                  className={styles.postImage}
+                  src={editedImage}
+                  width={700}
+                ></img>
               </div>
             ) : (
-              <div
+              <img
+                src={placeholderImage}
                 onClick={handleImageClick}
                 className={`${styles.noImage} flexCenter`}
-              >
-                Image here
-              </div>
+              ></img>
             )}
           </div>
           <div className={styles.postFooter}>

@@ -2,13 +2,16 @@
   display: grid;
   max-height: 800px;
   min-width: 550px;
-  grid-template-rows: 1fr 4fr 0.5fr;
-  font-family: "GeistMono";
-
+  grid-template-rows: auto 1fr auto;
+  .introText {
+    display: flex;
+    justify-content: center;
+  }
   .stepsRowWrapper {
     display: grid;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
+    font-family: "GeistMono";
 
     .stepsRow {
       display: grid;

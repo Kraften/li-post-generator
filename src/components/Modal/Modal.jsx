@@ -6,7 +6,7 @@ import userStore from "./../../store/userStore";
 import { SECTION } from "../../constants/constants.js";
 import { EDIT_SECTION } from "./../../constants/constants";
 
-const ModalComponent = ({ scale, title, children, isClosable }) => {
+const ModalComponent = ({ scale, title, titleCenter, helpText, children }) => {
   const { updateSelectedStep, updateSelectedEditSection } = userStore();
 
   const handleCloseModal = () => {
@@ -16,28 +16,28 @@ const ModalComponent = ({ scale, title, children, isClosable }) => {
 
   return (
     <div className={`${styles.modal} ${scale ? styles.scaleUp : null}`}>
-      {isClosable && (
-        <div className={styles.close}>
-          <IconButton size="large" onClick={handleCloseModal} disableRipple>
-            <CloseIcon />
-          </IconButton>
-        </div>
-      )}
-      {title === "" ? null : <h2>{title}</h2>}
+      <div className={styles.close}>
+        <IconButton size="large" onClick={handleCloseModal} disableRipple>
+          <CloseIcon />
+        </IconButton>
+      </div>
+      <div className={styles.header}>
+        {title === "" ? null : (
+          <h2 className={titleCenter ? "flexCenter" : ""}>{title}</h2>
+        )}
+        {helpText && <p className={styles.helpText}>{helpText}</p>}
+      </div>
       {children}
     </div>
   );
 };
 
 ModalComponent.propTypes = {
-  isClosable: PropTypes.bool,
   scale: PropTypes.bool,
   title: PropTypes.string,
   children: PropTypes.children,
-};
-
-ModalComponent.defaultProps = {
-  isClosable: true,
+  titleCenter: PropTypes.bool,
+  helpText: PropTypes.string,
 };
 
 export default ModalComponent;

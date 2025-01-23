@@ -1,11 +1,20 @@
 .modal {
   position: absolute;
-  top: 99px;
-  width: 100%;
   padding: 1rem;
   box-shadow: var(--selected-box-shadow);
   border-radius: var(--card-border-radius);
   background-color: white;
+  width: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    p {
+      padding: 1rem;
+    }
+  }
   .close {
     display: flex;
     justify-content: end;

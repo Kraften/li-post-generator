@@ -7,10 +7,10 @@ const initialUserState = {
   selectedEditSection: EDIT_SECTION.NONE,
 
   user: {
-    firstName: "John",
-    lastName: "Doe",
-    occupation: "",
-    hobby: "",
+    firstName: "Johannes ",
+    lastName: "Kraft",
+    occupation: "Software Engineer",
+    hobby: "Climbing",
   },
 };
 const userStore = create((set) => ({

@@ -1,24 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./Stepper.module.scss";
-import postStore from "../../store/postStore.js";
 import { run, extractBulletPointsAndHeaders } from "../../config/gemini.js";
 import ActiveStepContents from "./Active-Step-Contents/Active-Step-Contents";
-import { STEPS } from "../../constants/constants.js";
+import { STEPS, STEPS_LIST } from "../../constants/constants.js";
 import ButtonRowContents from "./Button-Row-Contents/Button-Row-Contents";
 import { PropTypes } from "prop-types";
+import postStore from "../../store/postStore.js";
 import userStore from "./../../store/userStore";
 
 const StepperComponent = () => {
+  const formRef = useRef();
   const [activeStep, setActiveStep] = useState(STEPS.INFO);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [chatError, setChatError] = useState("");
+  const [selectedPerkItems, setSelectedPerkItems] = useState([]);
 
   const { user } = userStore();
-
   const { updateListOfPerks, selectedPerksList, updateMainText } = postStore();
-
-  const steps = ["Info", "Select Perks", "Confirm"];
 
   const fetchAIResponse = async (prompt) => {
     setLoading(true);
@@ -49,6 +48,12 @@ const StepperComponent = () => {
       setActiveStep(nextStep);
     } catch (error) {
       handleError(error);
+    }
+  };
+
+  const validateForm = () => {
+    if (formRef.current) {
+      setIsFormValid(formRef.current.checkValidity());
     }
   };
 
@@ -91,11 +96,16 @@ const StepperComponent = () => {
     </li>
   );
 
+  // StepIndicator.propTypes = {
+  //   step: PropTypes.string,
+  //   isActive: PropTypes.func,
+  // };
+
   return (
     <div className={styles.stepper}>
       <div className={styles.stepsRowWrapper}>
         <ul className={styles.stepsRow}>
-          {steps.map((step) => (
+          {STEPS_LIST.map((step) => (
             <StepIndicator
               key={step}
               step={step}
@@ -105,17 +115,19 @@ const StepperComponent = () => {
         </ul>
       </div>
       <div className={styles.contentsRow}>
-        <div className={styles.loading}></div>
         {loading ? <LoadingSpinner></LoadingSpinner> : null}
-
         <ActiveStepContents
           activeStep={activeStep}
           chatError={chatError}
+          formRef={formRef}
+          passSelectedItems={(e) => setSelectedPerkItems(e)}
+          validateForm={(e) => validateForm(e)}
         ></ActiveStepContents>
       </div>
       <div className={styles.buttonsRow}>
         <ButtonRowContents
-          isDisabled={loading}
+          isDisabled={isFormValid}
+          isLoading={loading}
           activeStep={activeStep}
           handleSendHobbyQuestion={() =>
             fetchAndProcessHobbyQuestion(STEPS.PERKS)
