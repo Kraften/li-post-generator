@@ -25,6 +25,11 @@ const EditTextComponent = ({ text, section }) => {
   return (
     <>
       <TextareaAutosize
+        sx={{
+          "&:focus": {
+            outline: "none",
+          },
+        }}
         id="outlined-adornment-password"
         onChange={(e) => handleTextChange(e)}
         className={styles.textInput}

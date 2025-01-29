@@ -11,7 +11,6 @@
     display: grid;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
-    font-family: "GeistMono";
 
     .stepsRow {
       display: grid;
@@ -24,6 +23,7 @@
         grid-template-columns: repeat(2, auto);
 
         .circleWrapper {
+          margin: 0 1rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -60,16 +60,8 @@
         }
       }
       li:last-child {
-        display: grid;
-        grid-template-columns: repeat(1, 45px);
-
-        .circleWrapper {
-          grid-row: 1;
-        }
-        .lineWrapper {
-          z-index: 1;
-          grid-row: 2;
-        }
+        display: flex;
+        flex-direction: column;
       }
       .titleWrapper {
         z-index: 1;
@@ -78,10 +70,6 @@
         display: flex;
         white-space: nowrap;
       }
-      .circleLineRow {
-        display: flex;
-        align-items: center;
-      }
     }
   }
 }
@@ -89,6 +77,7 @@
 .contentsRow {
   position: relative;
   overflow: auto;
+  margin-bottom: 1rem;
 
   ul {
     padding: 0rem 2rem;
@@ -98,7 +87,6 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  margin-right: 2rem;
 }
 
 .spinner {

@@ -38,5 +38,5 @@ ActiveStepContents.propTypes = {
   activeStep: PropTypes.string,
   chatError: PropTypes.string,
   passSelectedPerksToParent: PropTypes.func,
-  validateForm2: PropTypes.func,
+  validateForm: PropTypes.func,
 };

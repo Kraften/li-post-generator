@@ -6,7 +6,6 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { STEPS } from "./../../../constants/constants";
 import { SECTION } from "../../../constants/constants";
 import userStore from "../../../store/userStore";
-import { useEffect } from "react";
 import postStore from "../../../store/postStore";
 
 const ButtonRowContents = ({
@@ -15,7 +14,6 @@ const ButtonRowContents = ({
   activeStep,
   handleSendHobbyQuestion,
   handleSendPerksQuestion,
-  selectedPerkItems,
 }) => {
   const { updateSelectedStep } = userStore();
   const { selectedPerksList } = postStore();
@@ -23,12 +21,6 @@ const ButtonRowContents = ({
   const handleSaveAndClose = () => {
     updateSelectedStep(SECTION.NONE);
   };
-
-  useEffect(() => {
-    if (selectedPerksList.length === 0) {
-      console.log("The selectedPerksList list is empty.");
-    }
-  }, [selectedPerksList]);
 
   const buttonRowSwitcher = () => {
     switch (activeStep) {

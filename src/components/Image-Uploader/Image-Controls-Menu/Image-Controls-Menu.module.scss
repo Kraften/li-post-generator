@@ -4,6 +4,7 @@
   padding: 1rem;
   justify-content: center;
   gap: 1rem;
+  margin: 1rem 0 2rem 0;
 
   .menuItem {
     display: grid;
@@ -22,7 +23,9 @@
     justify-content: center;
     align-items: center;
     grid-row: 1;
-
+    p {
+      font-size: 12px;
+    }
     .circle {
       border-radius: 25px;
       width: 40px;
@@ -39,20 +42,27 @@
   }
 
   .imageUpload {
-    margin-top: 1rem;
+    margin-top: 2rem;
     grid-row: 2;
 
     .relative {
       position: relative;
+      display: flex;
+      justify-content: center;
+      .absolute {
+        position: absolute;
+      }
       .image {
         cursor: pointer;
-        padding: 1rem;
+        width: 140px;
       }
       .plusButton {
         position: absolute;
-        font-size: 20px;
-        width: 35px;
-        height: 35px;
+        left: 44px;
+        top: 30px;
+        font-size: 12px;
+        width: 53px;
+        height: 27px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -64,7 +74,7 @@
     }
   }
   .logoControls {
-    margin-top: 1rem;
+    margin-top: 2rem;
     grid-row: 2;
     display: flex;
     justify-content: center;
@@ -84,7 +94,7 @@
     }
   }
   .colorControls {
-    margin-top: 1rem;
+    margin-top: 2rem;
 
     display: flex;
     justify-content: center;
@@ -96,13 +106,15 @@
       height: 50px;
       border-radius: 7px;
       padding: 1rem;
-      margin: 0.5rem;
+      margin-right: 1rem;
       border: 1px solid black;
       cursor: pointer;
       &.black {
+        margin-top: 1rem;
         background-color: black;
       }
       &.white {
+        margin-top: 1rem;
         background-color: white;
       }
       &.selected {

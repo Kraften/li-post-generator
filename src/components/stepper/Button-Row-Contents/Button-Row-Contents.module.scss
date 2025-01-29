@@ -1,6 +1,5 @@
 .wrapper {
-  padding: 1rem;
-  margin: 1rem;
+  margin: 0 1rem 1rem 0;
   .nextButton {
     transform: scale(2.5);
     color: var(--primary-green);
@@ -8,13 +7,18 @@
     height: fit-content;
     padding: 0;
     &:hover {
-      transform: scale(3);
+      color: var(--hover-green);
     }
   }
   .saveButton {
-    position: relative;
-    transform: scale(2);
+    transform: scale(2.5);
     color: var(--primary-green);
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    &:hover {
+      color: var(--hover-green);
+    }
   }
   .saveButton:hover {
     color: var(--hover-green);

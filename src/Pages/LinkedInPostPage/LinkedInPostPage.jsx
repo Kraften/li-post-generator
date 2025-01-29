@@ -1,5 +1,4 @@
 import JSZip from "jszip";
-
 import styles from "./LinkedInPostPage.module.scss";
 import { SECTION } from "../../constants/constants";
 import ImageUploaderComponent from "../../components/Image-Uploader/Image-Uploader";
@@ -14,10 +13,17 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { capitalizeFirstLetter } from "./../../utils/utils";
 import placeholderImage from "/placeholder.svg";
+import iconSendImage from "/PS_Icon_Send.svg";
 
 const LinkedInPostPage = () => {
-  const { editedImage, mainText, introText, isHelpOpen, updateIsHelpOpen } =
-    postStore();
+  const {
+    editedImage,
+    image,
+    mainText,
+    introText,
+    isHelpOverlayOpen,
+    updateIsHelpOverlayOpen,
+  } = postStore();
   const {
     user,
     selectedStep,
@@ -48,17 +54,19 @@ const LinkedInPostPage = () => {
   };
 
   const handleCloseModal = () => {
-    updateIsHelpOpen(false);
+    updateIsHelpOverlayOpen(false);
   };
 
   const handleDownload = async () => {
-    if (!editedImage) {
+    if (!editedImage && !image) {
       alert("Please upload an image first!");
       return;
     }
-
     const zip = new JSZip();
     zip.file("image-with-logo.png", editedImage.split(",")[1], {
+      base64: true,
+    });
+    zip.file("image-without-logo.png", image.split(",")[1], {
       base64: true,
     });
     const textContent = `${introText} \n \n ${mainText}`;
@@ -148,8 +156,9 @@ const LinkedInPostPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      {isHelpOpen && (
-        <div className={styles.aaaq}>
+      {/* TODO - Add a help modal here */}
+      {isHelpOverlayOpen && (
+        <div className={styles.helpContainer}>
           <div className={styles.aaaabsolute}>
             <div className={styles.close}>
               <IconButton size="large" onClick={handleCloseModal} disableRipple>
@@ -162,7 +171,10 @@ const LinkedInPostPage = () => {
       <div className={styles.relative}>
         <div
           className={`${styles.linkedinPost} ${
-            selectedStep === SECTION.NONE ? styles.boxShadow : styles.border
+            selectedStep === SECTION.NONE &&
+            selectedEditSection === EDIT_SECTION.NONE
+              ? styles.boxShadow
+              : styles.border
           }`}
         >
           <div className={`${styles.postHeader}`}>
@@ -231,11 +243,27 @@ const LinkedInPostPage = () => {
               Share
             </button>
           </div>
-          {selectedStep !== SECTION.NONE ? (
+          {selectedStep !== SECTION.NONE ||
+          selectedEditSection !== EDIT_SECTION.NONE ? (
             <div className={styles.absolute}></div>
           ) : null}
           {renderModalContent()}
           {renderModalEditContent()}
+        </div>
+        <div className={styles.saveButtonContainer}>
+          <IconButton
+            disabled={!editedImage && !image}
+            className={styles.saveButton}
+            size="large"
+            onClick={handleDownload}
+            disableRipple
+          >
+            <img
+              src={iconSendImage}
+              onClick={handleDownload}
+              disabled={!editedImage}
+            ></img>
+          </IconButton>
         </div>
       </div>
     </div>

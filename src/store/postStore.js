@@ -3,7 +3,7 @@ import { create } from "zustand";
 const initialPostState = {
   image: null,
   editedImage: null,
-  isHelpOpen: false,
+  isHelpOverlayOpen: false,
   listOfPerks: [],
   selectedPerksList: [],
   introText: `Excited to share that I recently joined Tech Company as a Software Engineer! Looking forward to making a difference and learning along the way. Excited to share that I recently joined Tech Company as a Software Engineer! Looking forward to making a difference and learning along the way. Excited to share that I recently joined Tech Company as a Software Engineer! Looking forward to making a difference and Lorem`,
@@ -15,7 +15,8 @@ const postStore = create((set) => ({
 
   updateImage: (image) => set(() => ({ image: image })),
   updateEditedImage: (editedImage) => set(() => ({ editedImage: editedImage })),
-  updateIsHelpOpen: (isHelpOpen) => set(() => ({ isHelpOpen: isHelpOpen })),
+  updateIsHelpOverlayOpen: (isHelpOverlayOpen) =>
+    set(() => ({ isHelpOverlayOpen: isHelpOverlayOpen })),
   updateIntroText: (introText) => set(() => ({ introText: introText })),
   updateMainText: (mainText) => set(() => ({ mainText: mainText })),
   updateListOfPerks: (listOfPerks) => set(() => ({ listOfPerks: listOfPerks })),

@@ -17,14 +17,17 @@ const ModalComponent = ({ scale, title, titleCenter, helpText, children }) => {
   return (
     <div className={`${styles.modal} ${scale ? styles.scaleUp : null}`}>
       <div className={styles.close}>
-        <IconButton size="large" onClick={handleCloseModal} disableRipple>
+        {title === "" ? null : <h2>{title}</h2>}
+        <IconButton
+          className={styles.x}
+          size="large"
+          onClick={handleCloseModal}
+          disableRipple
+        >
           <CloseIcon />
         </IconButton>
       </div>
       <div className={styles.header}>
-        {title === "" ? null : (
-          <h2 className={titleCenter ? "flexCenter" : ""}>{title}</h2>
-        )}
         {helpText && <p className={styles.helpText}>{helpText}</p>}
       </div>
       {children}
@@ -35,7 +38,7 @@ const ModalComponent = ({ scale, title, titleCenter, helpText, children }) => {
 ModalComponent.propTypes = {
   scale: PropTypes.bool,
   title: PropTypes.string,
-  children: PropTypes.children,
+  children: PropTypes.node,
   titleCenter: PropTypes.bool,
   helpText: PropTypes.string,
 };

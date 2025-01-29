@@ -57,10 +57,6 @@ function extractBulletPointsAndHeaders(text) {
     }
   });
 
-  console.log(
-    "🚀 ~ extractBulletPointsAndHeaders ~ structuredPoints:",
-    structuredPoints
-  );
   return structuredPoints;
 }
 

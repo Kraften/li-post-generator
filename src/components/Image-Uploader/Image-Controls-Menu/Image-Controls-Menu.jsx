@@ -11,7 +11,6 @@ import sigmaBlackLogo from "/SC-logo_BLACK.png";
 import sigmaWhiteLogo from "/SC-logo_WHITE.png";
 import sigmaEngBlackLogo from "/190425_Engineering_by_SC_tag_BLACK.png";
 import sigmaEngWhiteLogo from "/190425_Engineering_by_SC_tag_WHITE.png";
-import Divider from "@mui/material/Divider";
 import { PropTypes } from "prop-types";
 
 export const LOGOS = {
@@ -39,7 +38,6 @@ const ImageControlsMenu = ({ onLogoChange }) => {
   ];
 
   useEffect(() => {
-    console.log(logoColor);
     onLogoChange({ logo: selectedLogo, color: logoColor });
   }, [selectedLogo, logoColor]);
 
@@ -54,9 +52,7 @@ const ImageControlsMenu = ({ onLogoChange }) => {
       setUploadedImage(URL.createObjectURL(file));
     }
   };
-  const handleLogoChange = (event) => {
-    setSelectedLogo(event.target.value);
-  };
+
   const handleColorChange = (event) => {
     setLogoColor(event.target.value);
   };
@@ -80,20 +76,24 @@ const ImageControlsMenu = ({ onLogoChange }) => {
             </div>
             <div className={styles.imageUpload}>
               <div className={styles.relative}>
-                <CircleButton char={"+"}></CircleButton>
-                <img
-                  src={placeholderImage}
-                  alt=""
-                  onClick={onButtonClick}
-                  className={styles.image}
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={inputFile}
-                  onChange={handleImageUpload}
-                  style={{ display: "none" }}
-                />
+                <div className={styles.absolute}>
+                  <div onClick={onButtonClick}>
+                    <CircleButton char={"Add"}></CircleButton>
+                  </div>
+                  <img
+                    src={placeholderImage}
+                    alt=""
+                    onClick={onButtonClick}
+                    className={styles.image}
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={inputFile}
+                    onChange={handleImageUpload}
+                    style={{ display: "none" }}
+                  />
+                </div>
               </div>
             </div>
           </>
@@ -112,7 +112,7 @@ const ImageControlsMenu = ({ onLogoChange }) => {
                     type="radio"
                     name="image"
                     checked={selectedLogo === "sigmaEngLogo"}
-                    onChange={handleLogoChange}
+                    onChange={() => setSelectedLogo("sigmaEngLogo")}
                   />
                   <img
                     width={"100px"}
@@ -125,7 +125,7 @@ const ImageControlsMenu = ({ onLogoChange }) => {
                     type="radio"
                     name="image"
                     checked={selectedLogo === "sigmaLogo"}
-                    onChange={handleLogoChange}
+                    onChange={() => setSelectedLogo("sigmaLogo")}
                   />
                   <img
                     width={"100px"}

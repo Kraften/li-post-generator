@@ -62,7 +62,7 @@ const StepperComponent = () => {
       const continuousString = selectedPerksList
         .map((item) => `${item.header}: ${item.bulletPoint}`)
         .join(" ");
-      const perksQuestion = `Write a 200 word text about a person with these skills: ${continuousString} that works as a ${user.occupation}.`;
+      const perksQuestion = `Write a 200 word text about ${user.firstName} with these skills: ${continuousString} that works as a ${user.occupation}.`;
       const answer = await fetchAIResponse(perksQuestion);
       updateMainText(answer);
       setActiveStep(nextStep);
@@ -95,11 +95,6 @@ const StepperComponent = () => {
       </div>
     </li>
   );
-
-  // StepIndicator.propTypes = {
-  //   step: PropTypes.string,
-  //   isActive: PropTypes.func,
-  // };
 
   return (
     <div className={styles.stepper}>

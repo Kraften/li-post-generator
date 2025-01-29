@@ -45,10 +45,11 @@
   }
 
   .text {
-    font-family: "GeistMono";
-    display: flex;
-    padding: 0px 8px;
+    padding: 0px 11px;
     margin: 0 6px;
     cursor: pointer;
+    img {
+      width: 80px;
+    }
   }
 }

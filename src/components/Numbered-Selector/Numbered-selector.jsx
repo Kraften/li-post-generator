@@ -1,5 +1,7 @@
 import styles from "./numbered-selector.module.scss";
 import PropTypes from "prop-types";
+import iconText from "/PS_Icon_Text.svg";
+import iconImg from "/PS_Icon_Img.svg";
 
 const NumberedSelector = ({ section, selectSection }) => {
   const svgLine = () => {
@@ -54,7 +56,11 @@ const NumberedSelector = ({ section, selectSection }) => {
       <span
         className={`${styles.text} ${!section.isNumberLeft ? "flexEnd" : ""}`}
       >
-        {section.title}
+        <img
+          src={section.sectionNumber === "01" ? iconText : iconImg}
+          alt=""
+          className={styles.image}
+        />
       </span>
     </div>
   );

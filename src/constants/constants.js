@@ -1,10 +1,10 @@
 export const STEPS = {
   INFO: "Info",
-  PERKS: "Select Perks",
+  PERKS: "Perks",
   CONFIRM: "Confirm",
 };
 
-export const STEPS_LIST = ["Info", "Select Perks", "Confirm"];
+export const STEPS_LIST = ["Info", "Perks", "Confirm"];
 
 export const SECTION = {
   NONE: "00",

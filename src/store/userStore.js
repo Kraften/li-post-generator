@@ -16,11 +16,19 @@ const initialUserState = {
 const userStore = create((set) => ({
   ...initialUserState,
 
+  // Only one modal should be open at a time, thats why we close all modals before opening a new one.
   updateSelectedStep: (selectedStep) =>
-    set(() => ({ selectedStep: selectedStep })),
+    set(() => ({
+      selectedEditSection: EDIT_SECTION.NONE,
+      selectedStep: selectedStep,
+    })),
 
+  // Only one modal should be open at a time, thats why we close all modals before opening a new one.
   updateSelectedEditSection: (selectedEditSection) =>
-    set(() => ({ selectedEditSection: selectedEditSection })),
+    set(() => ({
+      selectedStep: SECTION.NONE,
+      selectedEditSection: selectedEditSection,
+    })),
 
   setUser: (updatedFields) =>
     set((state) => ({
