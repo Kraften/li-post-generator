@@ -27,17 +27,11 @@ const ButtonRowContents = ({
       case STEPS.INFO:
         return (
           <IconButton
+            className={styles.button}
             disabled={!isDisabled || isLoading}
-            className={styles.nextButton}
             size="large"
             onClick={handleSendHobbyQuestion}
             disableRipple
-            sx={{
-              "&.Mui-disabled": {
-                background: "white",
-                color: "var(--disabled-grey)",
-              },
-            }}
           >
             <ArrowCircleRightIcon />
           </IconButton>
@@ -47,7 +41,7 @@ const ButtonRowContents = ({
         return (
           <IconButton
             disabled={selectedPerksList.length === 0}
-            className={styles.nextButton}
+            className={styles.button}
             size="large"
             onClick={handleSendPerksQuestion}
             disableRipple
@@ -58,7 +52,7 @@ const ButtonRowContents = ({
       case STEPS.CONFIRM:
         return (
           <IconButton
-            className={styles.saveButton}
+            className={styles.button}
             size="large"
             onClick={handleSaveAndClose}
             disableRipple
@@ -70,7 +64,7 @@ const ButtonRowContents = ({
         break;
     }
   };
-  return <div className={styles.wrapper}>{buttonRowSwitcher()}</div>;
+  return <div className={styles.buttonWrapper}>{buttonRowSwitcher()}</div>;
 };
 
 export default ButtonRowContents;

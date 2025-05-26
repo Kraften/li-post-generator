@@ -1,4 +1,4 @@
-import LinkedInPostPage from "./Pages/LinkedInPostPage/LinkedInPostPage";
+import LinkedInPostPage from "./Pages/LinkedInPostPage/LinkedInPostPage.tsx";
 
 const App = () => {
   return (

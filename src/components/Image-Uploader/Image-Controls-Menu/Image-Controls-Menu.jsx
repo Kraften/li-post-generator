@@ -1,33 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import styles from "./Image-Controls-Menu.module.scss";
-
-import IconButton from "@mui/material/IconButton";
-import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
-
 import placeholderImage from "/placeholder.svg";
-
-import postStore from "./../../../store/postStore";
-import sigmaBlackLogo from "/SC-logo_BLACK.png";
-import sigmaWhiteLogo from "/SC-logo_WHITE.png";
-import sigmaEngBlackLogo from "/190425_Engineering_by_SC_tag_BLACK.png";
-import sigmaEngWhiteLogo from "/190425_Engineering_by_SC_tag_WHITE.png";
+import postStore from "../../../store/postStore";
+import { LOGOS } from "../../../constants/constants";
 import { PropTypes } from "prop-types";
-
-export const LOGOS = {
-  sigmaLogo: {
-    black: sigmaBlackLogo,
-    white: sigmaWhiteLogo,
-  },
-  sigmaEngLogo: {
-    black: sigmaEngBlackLogo,
-    white: sigmaEngWhiteLogo,
-  },
-};
 
 const ImageControlsMenu = ({ onLogoChange }) => {
   const inputFile = useRef(null);
   const [selectedLogo, setSelectedLogo] = useState("sigmaEngLogo");
-  const [uploadedImage, setUploadedImage] = useState(null);
   const [logoColor, setLogoColor] = useState("black");
   const { updateImage } = postStore();
 
@@ -47,10 +27,51 @@ const ImageControlsMenu = ({ onLogoChange }) => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      updateImage(URL.createObjectURL(file));
-      setUploadedImage(URL.createObjectURL(file));
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload an image file");
+      return;
     }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const img = new Image();
+      img.src = reader.result;
+      img.onload = () => {
+        // Create canvas for image optimization
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Calculate new dimensions while maintaining aspect ratio
+        let width = img.width;
+        let height = img.height;
+        const maxDimension = 1200; // Maximum dimension for LinkedIn posts
+
+        if (width > height && width > maxDimension) {
+          height = Math.round((height * maxDimension) / width);
+          width = maxDimension;
+        } else if (height > maxDimension) {
+          width = Math.round((width * maxDimension) / height);
+          height = maxDimension;
+        }
+
+        // Set canvas dimensions
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw image with optimization
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert to optimized format
+        const optimizedImage = canvas.toDataURL("image/jpeg", 0.85);
+        updateImage(optimizedImage, { width, height });
+      };
+    };
   };
 
   const handleColorChange = (event) => {
@@ -116,7 +137,7 @@ const ImageControlsMenu = ({ onLogoChange }) => {
                   />
                   <img
                     width={"100px"}
-                    src={sigmaEngBlackLogo}
+                    src={LOGOS.sigmaEngLogo.black}
                     onClick={() => setSelectedLogo("sigmaEngLogo")}
                   />
                 </label>
@@ -129,7 +150,7 @@ const ImageControlsMenu = ({ onLogoChange }) => {
                   />
                   <img
                     width={"100px"}
-                    src={sigmaBlackLogo}
+                    src={LOGOS.sigmaLogo.black}
                     onClick={() => setSelectedLogo("sigmaLogo")}
                   />
                 </label>

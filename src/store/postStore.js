@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const initialPostState = {
   image: null,
+  imageSize: { width: 0, height: 0 },
   editedImage: null,
   isHelpOverlayOpen: false,
   listOfPerks: [],
@@ -13,7 +14,7 @@ const initialPostState = {
 const postStore = create((set) => ({
   ...initialPostState,
 
-  updateImage: (image) => set(() => ({ image: image })),
+  updateImage: (image, size) => set(() => ({ image, imageSize: size })),
   updateEditedImage: (editedImage) => set(() => ({ editedImage: editedImage })),
   updateIsHelpOverlayOpen: (isHelpOverlayOpen) =>
     set(() => ({ isHelpOverlayOpen: isHelpOverlayOpen })),

@@ -62,3 +62,22 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 # License
 This project is licensed under the MIT License.
+
+## Todo
+
+# Frontend
+What should be shown before the text is generated.
+
+Rebuild project to use Typescript for future. (LinkedInPostPage is converted to tsx already and all necessary packages are installed)
+
+First paragraph does not get generated at the moment, what should it say and what question should we ask AI go generate it?
+
+Make the whole app scale to work on mobile, there needs to be a new design and layout for this to work.
+
+Make sure the image is the correct scale and that it keeps its original size after saving.
+
+# Backend 
+There should be a backend function that saves all posts to a DB.
+Feature to lets Sigma send a request to a employee to fill out the Post generator.
+There should be a Admin view to lets Sigma see all the saved employee posts.
+THe final product should not save the post to local it should save them to a DB when the save button is pressed.

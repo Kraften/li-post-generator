@@ -1,26 +1,15 @@
-.wrapper {
-  margin: 0 1rem 1rem 0;
-  .nextButton {
-    transform: scale(2.5);
+.buttonWrapper {
+  .button {
+    border-radius: 25px;
+    cursor: pointer;
+    transform: scale(2);
     color: var(--primary-green);
-    width: fit-content;
-    height: fit-content;
-    padding: 0;
+    &:disabled {
+      color: var(--disabled-grey);
+      cursor: not-allowed;
+    }
     &:hover {
       color: var(--hover-green);
     }
-  }
-  .saveButton {
-    transform: scale(2.5);
-    color: var(--primary-green);
-    width: fit-content;
-    height: fit-content;
-    padding: 0;
-    &:hover {
-      color: var(--hover-green);
-    }
-  }
-  .saveButton:hover {
-    color: var(--hover-green);
   }
 }

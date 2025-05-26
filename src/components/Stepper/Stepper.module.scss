@@ -1,6 +1,6 @@
 .stepper {
   display: grid;
-  max-height: 800px;
+  max-height: 700px;
   min-width: 550px;
   grid-template-rows: auto 1fr auto;
   .introText {
@@ -77,16 +77,16 @@
 .contentsRow {
   position: relative;
   overflow: auto;
+  padding: 1rem;
   margin-bottom: 1rem;
-
-  ul {
-    padding: 0rem 2rem;
-  }
+  scrollbar-color: #27ae60 lightgrey;
+  scrollbar-width: thin;
 }
 .buttonsRow {
   display: flex;
   justify-content: end;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .spinner {

@@ -1,21 +1,22 @@
+import React from "react";
 import JSZip from "jszip";
 import styles from "./LinkedInPostPage.module.scss";
-import { SECTION } from "../../constants/constants";
+import { SECTION, EDIT_SECTION } from "../../constants/constants";
 import ImageUploaderComponent from "../../components/Image-Uploader/Image-Uploader";
 import postStore from "../../store/postStore";
-import StepperComponent from "../../components/Stepper/Stepper.jsx";
+import StepperComponent from "../../components/Stepper/Stepper";
 import userStore from "../../store/userStore";
 import NumberedSelector from "../../components/Numbered-Selector/Numbered-selector";
 import ModalComponent from "../../components/Modal/Modal";
-import { EDIT_SECTION } from "./../../constants/constants";
 import EditTextComponent from "../../components/Edit-Text/Edit-Text";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { capitalizeFirstLetter } from "./../../utils/utils";
 import placeholderImage from "/placeholder.svg";
 import iconSendImage from "/PS_Icon_Send.svg";
+import { Section, User, PostStore, UserStore } from "../../models/types";
 
-const LinkedInPostPage = () => {
+const LinkedInPostPage: React.FC = () => {
   const {
     editedImage,
     image,
@@ -23,64 +24,122 @@ const LinkedInPostPage = () => {
     introText,
     isHelpOverlayOpen,
     updateIsHelpOverlayOpen,
-  } = postStore();
+  } = postStore() as PostStore;
+
   const {
     user,
     selectedStep,
     updateSelectedStep,
     selectedEditSection,
     updateSelectedEditSection,
-  } = userStore();
+  } = userStore() as UserStore;
 
-  const SECTIONS = [
+  const SECTIONS: Section[] = [
     { sectionNumber: "01", title: "Text", isNumberLeft: true },
     { sectionNumber: "02", title: "Picture", isNumberLeft: false },
   ];
 
-  const handleAboutClick = () => {
+  const handleAboutClick = (): void => {
     updateSelectedEditSection(EDIT_SECTION.INTRO_TEXT);
   };
 
-  const handleBodyClick = () => {
+  const handleBodyClick = (): void => {
     updateSelectedEditSection(EDIT_SECTION.MAIN_TEXT);
   };
 
-  const handleImageClick = () => {
+  const handleImageClick = (): void => {
     updateSelectedEditSection(EDIT_SECTION.IMAGE);
   };
 
-  const handleSelectionFromChild = (section) => {
+  const handleSelectionFromChild = (section: string): void => {
     updateSelectedStep(section);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     updateIsHelpOverlayOpen(false);
   };
 
-  const handleDownload = async () => {
+  const handleDownload = async (): Promise<void> => {
     if (!editedImage && !image) {
       alert("Please upload an image first!");
       return;
     }
-    const zip = new JSZip();
-    zip.file("image-with-logo.png", editedImage.split(",")[1], {
-      base64: true,
-    });
-    zip.file("image-without-logo.png", image.split(",")[1], {
-      base64: true,
-    });
-    const textContent = `${introText} \n \n ${mainText}`;
-    zip.file("post.txt", textContent);
-    zip.generateAsync({ type: "blob" }).then((content) => {
+
+    try {
+      const zip = new JSZip();
+
+      // Optimize images before adding to zip
+      const optimizeImage = async (dataUrl: string): Promise<string> => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            if (!ctx) {
+              throw new Error("Could not get canvas context");
+            }
+
+            // Set dimensions
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Draw with high-quality settings
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
+            ctx.drawImage(img, 0, 0);
+
+            // Convert to optimized format
+            const optimizedDataUrl = canvas.toDataURL("image/jpeg", 0.9);
+            resolve(optimizedDataUrl.split(",")[1]);
+          };
+          img.src = dataUrl;
+        });
+      };
+
+      // Optimize both images
+      const [optimizedEditedImage, optimizedOriginalImage] = await Promise.all([
+        editedImage ? optimizeImage(editedImage) : Promise.resolve(""),
+        image ? optimizeImage(image) : Promise.resolve(""),
+      ]);
+
+      // Add optimized images to zip
+      zip.file("image-with-logo.jpg", optimizedEditedImage, { base64: true });
+      zip.file("image-without-logo.jpg", optimizedOriginalImage, {
+        base64: true,
+      });
+
+      // Add text content
+      const textContent = `${introText}\n\n${mainText}`;
+      zip.file("post.txt", textContent);
+
+      // Generate zip with compression
+      const content = await zip.generateAsync({
+        type: "blob",
+        compression: "DEFLATE",
+        compressionOptions: {
+          level: 9,
+        },
+      });
+
+      // Create download link
       const folderName = `${user.firstName}_${user.lastName}_post`;
       const a = document.createElement("a");
       a.href = URL.createObjectURL(content);
       a.download = `${folderName}.zip`;
       a.click();
-    });
+
+      // Clean up
+      URL.revokeObjectURL(a.href);
+    } catch (error) {
+      console.error("Error during download:", error);
+      alert(
+        "An error occurred while preparing the download. Please try again."
+      );
+    }
   };
 
-  const renderModalContent = () => {
+  const renderModalContent = (): JSX.Element | null => {
     switch (selectedStep) {
       case SECTION.FIRST:
         return (
@@ -114,7 +173,7 @@ const LinkedInPostPage = () => {
     }
   };
 
-  const renderModalEditContent = () => {
+  const renderModalEditContent = (): JSX.Element | null => {
     switch (selectedEditSection) {
       case EDIT_SECTION.INTRO_TEXT:
         return (
@@ -122,7 +181,7 @@ const LinkedInPostPage = () => {
             <EditTextComponent
               text={introText}
               section={EDIT_SECTION.INTRO_TEXT}
-            ></EditTextComponent>
+            />
           </ModalComponent>
         );
 
@@ -132,12 +191,11 @@ const LinkedInPostPage = () => {
             <EditTextComponent
               text={mainText}
               section={EDIT_SECTION.MAIN_TEXT}
-            ></EditTextComponent>
+            />
           </ModalComponent>
         );
       case EDIT_SECTION.IMAGE:
         return (
-          // TODO: Change to edit image component.
           <ModalComponent
             scale={true}
             titleCenter={true}
@@ -156,7 +214,6 @@ const LinkedInPostPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      {/* TODO - Add a help modal here */}
       {isHelpOverlayOpen && (
         <div className={styles.helpContainer}>
           <div className={styles.aaaabsolute}>
@@ -226,14 +283,16 @@ const LinkedInPostPage = () => {
                   className={styles.postImage}
                   src={editedImage}
                   width={700}
-                ></img>
+                  alt="Post"
+                />
               </div>
             ) : (
               <img
                 src={placeholderImage}
                 onClick={handleImageClick}
                 className={`${styles.noImage} flexCenter`}
-              ></img>
+                alt="Placeholder"
+              />
             )}
           </div>
           <div className={styles.postFooter}>
@@ -258,11 +317,7 @@ const LinkedInPostPage = () => {
             onClick={handleDownload}
             disableRipple
           >
-            <img
-              src={iconSendImage}
-              onClick={handleDownload}
-              disabled={!editedImage}
-            ></img>
+            <img src={iconSendImage} onClick={handleDownload} alt="Send" />
           </IconButton>
         </div>
       </div>
